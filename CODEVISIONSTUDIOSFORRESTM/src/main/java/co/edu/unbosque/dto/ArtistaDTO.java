@@ -1,6 +1,7 @@
 package co.edu.unbosque.dto;
 
 public class ArtistaDTO {
+
 	private String nombre;
 
 	public ArtistaDTO(String nombre) {

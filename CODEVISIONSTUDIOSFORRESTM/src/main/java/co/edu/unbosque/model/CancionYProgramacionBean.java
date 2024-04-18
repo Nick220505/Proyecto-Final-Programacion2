@@ -1,13 +1,18 @@
-package co.edu.unbosque.dto;
+package co.edu.unbosque.model;
 
-public class CancionYProgramacionDTO {
+import javax.faces.bean.ManagedBean;
 
+import co.edu.unbosque.dao.CancionYProgramacionDAO;
+
+@ManagedBean
+public class CancionYProgramacionBean {
+
+	private CancionYProgramacionDAO gestorCancionesYProgramaciones;
 	private int idCancion;
 	private int idProgramacion;
 
-	public CancionYProgramacionDTO(int idCancion, int idProgramacion) {
-		this.idCancion = idCancion;
-		this.idProgramacion = idProgramacion;
+	public CancionYProgramacionBean() {
+		gestorCancionesYProgramaciones = new CancionYProgramacionDAO();
 	}
 
 	public int getIdCancion() {

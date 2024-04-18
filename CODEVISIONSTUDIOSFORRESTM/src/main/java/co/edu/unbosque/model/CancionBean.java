@@ -1,15 +1,19 @@
-package co.edu.unbosque.dto;
+package co.edu.unbosque.model;
 
-public class CancionDTO {
+import javax.faces.bean.ManagedBean;
 
+import co.edu.unbosque.dao.CancionDAO;
+
+@ManagedBean
+public class CancionBean {
+
+	private CancionDAO gestorCanciones;
 	private String nombre;
 	private String nombreArchivo;
 	private int idEmisora;
 
-	public CancionDTO(String nombre, String nombreArchivo, int idEmisora) {
-		this.nombre = nombre;
-		this.nombreArchivo = nombreArchivo;
-		this.idEmisora = idEmisora;
+	public CancionBean() {
+		gestorCanciones = new CancionDAO();
 	}
 
 	public String getNombre() {
@@ -35,5 +39,4 @@ public class CancionDTO {
 	public void setIdEmisora(int idEmisora) {
 		this.idEmisora = idEmisora;
 	}
-
 }

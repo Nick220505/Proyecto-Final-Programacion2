@@ -1,6 +1,7 @@
 package co.edu.unbosque.dto;
 
 public class TipoMusicaDTO {
+
 	private String tipo;
 
 	public TipoMusicaDTO(String tipo) {

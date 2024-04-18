@@ -1,6 +1,7 @@
 package co.edu.unbosque.dto;
 
 public class ModoTransmisionDTO {
+
 	private String modo;
 
 	public ModoTransmisionDTO(String modo) {
