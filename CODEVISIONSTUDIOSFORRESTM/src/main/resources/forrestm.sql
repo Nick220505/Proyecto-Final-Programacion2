@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS `canciones_y_programaciones`;
+DROP TABLE IF EXISTS `programaciones`;
 DROP TABLE IF EXISTS `artistas_y_canciones`;
 DROP TABLE IF EXISTS `canciones`;
 DROP TABLE IF EXISTS `artistas`;
@@ -49,4 +51,19 @@ CREATE TABLE `artistas_y_canciones` (
     PRIMARY KEY(`id`),
     FOREIGN KEY(`id_artista`) REFERENCES `artistas`(`id`),
     FOREIGN KEY(`id_cancion`) REFERENCES `canciones`(`id`)
+);
+
+CREATE TABLE `programaciones` (
+    `id` INT AUTO_INCREMENT,
+    `fecha` DATE,
+    PRIMARY KEY(`id`)
+);
+
+CREATE TABLE `canciones_y_programaciones` (
+    `id` INT AUTO_INCREMENT,
+    `id_cancion` INT,
+    `id_programacion` INT,
+    PRIMARY KEY(`id`),
+    FOREIGN KEY(`id_cancion`) REFERENCES `canciones`(`id`),
+    FOREIGN KEY(`id_programacion`) REFERENCES `programaciones`(`id`)
 );
