@@ -37,10 +37,8 @@ CREATE TABLE `canciones` (
     `id` INT AUTO_INCREMENT,
     `nombre` VARCHAR(64) NOT NULL,
     `nombre_archivo` VARCHAR(2048) NOT NULL,
-    `id_artista` INT,
     `id_emisora` INT,
     PRIMARY KEY(`id`),
-    FOREIGN KEY(`id_artista`) REFERENCES `artistas`(`id`),
     FOREIGN KEY(`id_emisora`) REFERENCES `emisoras`(`id`)
 );
 
