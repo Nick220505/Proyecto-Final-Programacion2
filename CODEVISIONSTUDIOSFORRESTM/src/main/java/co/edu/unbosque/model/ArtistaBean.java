@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-import javax.annotation.ManagedBean;
+import javax.faces.bean.ManagedBean;
 
 import co.edu.unbosque.dao.ArtistaDAO;
 
