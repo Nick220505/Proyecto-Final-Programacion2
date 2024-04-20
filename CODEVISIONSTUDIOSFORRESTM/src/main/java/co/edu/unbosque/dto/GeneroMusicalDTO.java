@@ -8,23 +8,23 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tipos_musica")
-public class TipoMusicaDTO {
+@Table(name = "generos_musicales")
+public class GeneroMusicalDTO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "tipo")
-	private String tipo;
+	@Column(name = "genero")
+	private String genero;
 
-	public TipoMusicaDTO(String tipo) {
-		this.tipo = tipo;
+	public GeneroMusicalDTO(String genero) {
+		this.genero = genero;
 	}
 
 	@Override
 	public String toString() {
-		return "TipoMusicaDTO [id=" + id + ", tipo=" + tipo + "]";
+		return "GeneroMusicalDTO [id=" + id + ", genero=" + genero + "]";
 	}
 
 	public int getId() {
@@ -35,12 +35,12 @@ public class TipoMusicaDTO {
 		this.id = id;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getGenero() {
+		return genero;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
 
 }

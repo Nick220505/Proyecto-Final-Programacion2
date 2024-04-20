@@ -1,13 +1,43 @@
 package co.edu.unbosque.dto;
 
-public class CancionYProgramacionDTO {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "canciones_y_programaciones")
+public class CancionYProgramacionDTO {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
+
+	@Column(name = "id_cancion")
 	private int idCancion;
+
+	@Column(name = "id_programacion")
 	private int idProgramacion;
 
 	public CancionYProgramacionDTO(int idCancion, int idProgramacion) {
 		this.idCancion = idCancion;
 		this.idProgramacion = idProgramacion;
+	}
+
+	@Override
+	public String toString() {
+		return "CancionYProgramacionDTO [id=" + id + ", idCancion=" + idCancion + ", idProgramacion=" + idProgramacion
+				+ "]";
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getIdCancion() {
@@ -25,4 +55,5 @@ public class CancionYProgramacionDTO {
 	public void setIdProgramacion(int idProgramacion) {
 		this.idProgramacion = idProgramacion;
 	}
+
 }

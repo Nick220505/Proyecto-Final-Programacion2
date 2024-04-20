@@ -36,7 +36,8 @@ public class CancionDAO implements ICrud<CancionDTO> {
 		return ms.consultarTablaDB(cadena, rs -> new CancionDTO(
 				rs.getString("nombre"),
 				rs.getString("nombre_archivo"),
-				rs.getInt("id_emisora")
+				rs.getInt("id_emisora"),
+				rs.getInt("id_genero_musical")
 			)
 		);
 	}
