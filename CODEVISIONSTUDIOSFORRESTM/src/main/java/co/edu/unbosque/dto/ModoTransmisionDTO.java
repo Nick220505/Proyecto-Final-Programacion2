@@ -17,6 +17,15 @@ public class ModoTransmisionDTO {
 
 	@Column(name = "modo")
 	private String modo;
+	
+	public ModoTransmisionDTO() {
+		
+	}
+
+	public ModoTransmisionDTO(int id, String modo) {
+		this.id = id;
+		this.modo = modo;
+	}
 
 	public ModoTransmisionDTO(String modo) {
 		this.modo = modo;
