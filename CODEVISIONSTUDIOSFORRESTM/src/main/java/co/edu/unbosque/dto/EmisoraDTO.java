@@ -24,6 +24,8 @@ public class EmisoraDTO {
 	@Column(name = "id_tipo_musica")
 	private int idTipoMusica;
 
+	public EmisoraDTO() {}
+
 	public EmisoraDTO(String nombre, int idModoTransmision, int idTipoMusica) {
 		this.nombre = nombre;
 		this.idModoTransmision = idModoTransmision;

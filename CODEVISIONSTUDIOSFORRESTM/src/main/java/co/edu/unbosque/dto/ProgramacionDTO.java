@@ -20,6 +20,8 @@ public class ProgramacionDTO {
 	@Column(name = "fecha")
 	private Date fecha;
 
+	public ProgramacionDTO() {}
+
 	public ProgramacionDTO(Date fecha) {
 		this.fecha = fecha;
 	}

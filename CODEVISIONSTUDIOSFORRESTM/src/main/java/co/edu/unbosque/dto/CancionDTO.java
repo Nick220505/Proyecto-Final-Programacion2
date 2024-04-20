@@ -27,6 +27,8 @@ public class CancionDTO {
 	@Column(name = "id_genero_musical")
 	private int idGeneroMusical;
 
+	public CancionDTO() {}
+
 	public CancionDTO(String nombre, String nombreArchivo, int idEmisora, int idGeneroMusical) {
 		this.nombre = nombre;
 		this.nombreArchivo = nombreArchivo;

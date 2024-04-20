@@ -22,6 +22,8 @@ public class ArtistaYCancionDTO {
 	@Column(name = "id_cancion")
 	private int idCancion;
 
+	public ArtistaYCancionDTO() {}
+
 	public ArtistaYCancionDTO(int idArtista, int idCancion) {
 		this.idArtista = idArtista;
 		this.idCancion = idCancion;

@@ -18,6 +18,8 @@ public class GeneroMusicalDTO {
 	@Column(name = "genero")
 	private String genero;
 
+	public GeneroMusicalDTO() {}
+
 	public GeneroMusicalDTO(String genero) {
 		this.genero = genero;
 	}

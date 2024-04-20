@@ -17,6 +17,8 @@ public class TipoMusicaDTO {
 
 	@Column(name = "tipo")
 	private String tipo;
+	
+	public TipoMusicaDTO() {}
 
 	public TipoMusicaDTO(String tipo) {
 		this.tipo = tipo;

@@ -18,6 +18,8 @@ public class ArtistaDTO {
 	@Column(name = "nombre")
 	private String nombre;
 
+	public ArtistaDTO() {}
+
 	public ArtistaDTO(String nombre) {
 		this.nombre = nombre;
 	}
