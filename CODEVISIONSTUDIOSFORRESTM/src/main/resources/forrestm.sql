@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS `canciones_y_programaciones`;
 DROP TABLE IF EXISTS `programaciones`;
 DROP TABLE IF EXISTS `artistas_y_canciones`;
 DROP TABLE IF EXISTS `canciones`;
+DROP TABLE IF EXISTS `generos_musicales`;
 DROP TABLE IF EXISTS `artistas`;
 DROP TABLE IF EXISTS `emisoras`;
 DROP TABLE IF EXISTS `tipos_musica`;
@@ -35,13 +36,21 @@ CREATE TABLE `artistas` (
     PRIMARY KEY(`id`)
 );
 
+CREATE TABLE `generos_musicales` (
+    `id` INT,
+    `genero` VARCHAR(64) NOT NULL,
+    PRIMARY KEY(`id`)
+);
+
 CREATE TABLE `canciones` (
     `id` INT AUTO_INCREMENT,
     `nombre` VARCHAR(64) NOT NULL,
     `nombre_archivo` VARCHAR(2048) NOT NULL,
     `id_emisora` INT,
+    `id_genero_musical` INT,
     PRIMARY KEY(`id`),
-    FOREIGN KEY(`id_emisora`) REFERENCES `emisoras`(`id`)
+    FOREIGN KEY(`id_emisora`) REFERENCES `emisoras`(`id`),
+    FOREIGN KEY(`id_genero_musical`) REFERENCES `generos_musicales`(`id`)
 );
 
 CREATE TABLE `artistas_y_canciones` (
