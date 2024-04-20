@@ -15,7 +15,7 @@ public class ProgramacionDAO implements ICrud<ProgramacionDTO> {
 	}
 
 	@Override
-	public void guardar(ProgramacionDTO programacion) throws Exception {
+	public void agregar(ProgramacionDTO programacion) throws Exception {
 
 		cadena = "INSERT INTO `programaciones` (`fecha`) VALUES ('" + programacion.getFecha() + "');";
 

@@ -15,7 +15,7 @@ public class TipoMusicaDAO implements ICrud<TipoMusicaDTO> {
 	}
 
 	@Override
-	public void guardar(TipoMusicaDTO tipoMusica) throws Exception {
+	public void agregar(TipoMusicaDTO tipoMusica) throws Exception {
 
 		cadena = "INSERT INTO `tipos_musica` (`tipo`) VALUES ('" + tipoMusica.getTipo() + "');";
 

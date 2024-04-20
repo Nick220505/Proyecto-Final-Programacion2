@@ -15,7 +15,7 @@ public class EmisoraDAO implements ICrud<EmisoraDTO> {
 	}
 
 	@Override
-	public void guardar(EmisoraDTO emisora) throws Exception {
+	public void agregar(EmisoraDTO emisora) throws Exception {
 		
 		cadena = "INSERT INTO `emisoras` (`nombre`, `id_modo_transmision`, `id_tipo_musica`) "
 			   + "VALUES "

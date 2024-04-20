@@ -15,7 +15,7 @@ public class CancionYProgramacionDAO implements ICrud<CancionYProgramacionDTO> {
 	}
 
 	@Override
-	public void guardar(CancionYProgramacionDTO cancionYProgramacion) throws Exception {
+	public void agregar(CancionYProgramacionDTO cancionYProgramacion) throws Exception {
 		
 		cadena = "INSERT INTO `canciones_y_programaciones` (`id_cancion`, `id_programacion`) "
 			   + "VALUES "

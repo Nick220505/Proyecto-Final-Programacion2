@@ -15,7 +15,7 @@ public class ArtistaDAO implements ICrud<ArtistaDTO> {
 	}
 
 	@Override
-	public void guardar(ArtistaDTO artista) throws Exception {
+	public void agregar(ArtistaDTO artista) throws Exception {
 
 		cadena = "INSERT INTO `artistas` ('nombre') VALUES ('" + artista.getNombre() + "');";
 

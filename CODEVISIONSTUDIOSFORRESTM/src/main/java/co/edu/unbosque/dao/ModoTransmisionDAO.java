@@ -15,7 +15,7 @@ public class ModoTransmisionDAO implements ICrud<ModoTransmisionDTO> {
 	}
 
 	@Override
-	public void guardar(ModoTransmisionDTO modoTransmision) throws Exception {
+	public void agregar(ModoTransmisionDTO modoTransmision) throws Exception {
 
 		cadena = "INSERT INTO `modos_transmision` (`modo`) VALUES ('" + modoTransmision.getModo() + "');";
 

@@ -15,7 +15,7 @@ public class CancionDAO implements ICrud<CancionDTO> {
 	}
 
 	@Override
-	public void guardar(CancionDTO cancion) throws Exception {
+	public void agregar(CancionDTO cancion) throws Exception {
 		
 		cadena = "INSERT INTO `canciones` (`nombre`, `nombre_archivo`, `id_emisora`) "
 			   + "VALUES "
