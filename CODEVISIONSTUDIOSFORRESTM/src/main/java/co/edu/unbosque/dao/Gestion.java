@@ -6,7 +6,7 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import co.edu.unbosque.persistence.MySQLDB;
 
-public class Gestion<T extends Object> implements ICrud<T> {
+public class Gestion<T> implements ICrud<T> {
 
 	private MySQLDB<T> ms;
 	private Class<T> clase;
