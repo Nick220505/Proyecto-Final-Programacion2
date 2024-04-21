@@ -1,6 +1,9 @@
 package co.edu.unbosque.dao;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import co.edu.unbosque.dto.ModoTransmisionDTO;
@@ -17,11 +20,12 @@ public class ModoTransmisionDAO extends Gestion<ModoTransmisionDTO> {
 	}
 
 	public void asignarModosDeTransmision() throws Exception {
-		String[] modos = { "AM", "FM", "Streaming" };
-		for (String modo : modos) {
-			if (!listar().stream().map(ModoTransmisionDTO::getModo).collect(Collectors.toList()).contains(modo)) {
-				agregar(new ModoTransmisionDTO(modo));
-			}
+		List<String> existingModos = listar().stream().map(ModoTransmisionDTO::getModo).collect(Collectors.toList());
+		Set<String> modosToAdd = new HashSet<>(Arrays.asList("AM", "FM", "Streaming"));
+		modosToAdd.removeAll(existingModos);
+
+		for (String modo : modosToAdd) {
+			agregar(new ModoTransmisionDTO(modo));
 		}
 	}
 

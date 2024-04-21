@@ -1,6 +1,9 @@
 package co.edu.unbosque.dao;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import co.edu.unbosque.dto.TipoMusicaDTO;
@@ -17,11 +20,12 @@ public class TipoMusicaDAO extends Gestion<TipoMusicaDTO> {
 	}
 
 	public void asignarTiposDeMusica() throws Exception {
-		String[] tipos = { "Rock", "De Planchar", "Reggaeton" };
-		for (String tipo : tipos) {
-			if (!listar().stream().map(TipoMusicaDTO::getTipo).collect(Collectors.toList()).contains(tipo)) {
-				agregar(new TipoMusicaDTO(tipo));
-			}
+		List<String> tiposExistentes = listar().stream().map(TipoMusicaDTO::getTipo).collect(Collectors.toList());
+		Set<String> tiposAAgregar = new HashSet<>(Arrays.asList("Rock", "De Planchar", "Reggaeton"));
+		tiposAAgregar.removeAll(tiposExistentes);
+
+		for (String tipo : tiposAAgregar) {
+			agregar(new TipoMusicaDTO(tipo));
 		}
 	}
 
