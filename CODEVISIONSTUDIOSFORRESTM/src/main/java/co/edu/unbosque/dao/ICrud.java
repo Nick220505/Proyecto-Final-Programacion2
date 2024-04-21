@@ -2,7 +2,7 @@ package co.edu.unbosque.dao;
 
 import java.util.List;
 
-public interface ICrud<T extends Object> {
+public interface ICrud<T> {
 
 	public abstract void agregar(T objeto) throws Exception;
 
