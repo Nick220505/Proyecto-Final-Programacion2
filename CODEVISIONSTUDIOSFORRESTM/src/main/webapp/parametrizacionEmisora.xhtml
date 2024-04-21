@@ -7,7 +7,7 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Parametrización de Emisora</title>
+	<title>ForrestM - Parametrización de Emisora</title>
 	<style>
 		button.ui-button {
 			margin: 10px;
@@ -15,6 +15,9 @@
 	</style>
 </h:head>
 <h:body>
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{parametrizacionEmisoraBean.inicializarOpcionesSeleccionables}" />
+	</f:metadata>
 	<h:form>
 		<p:card style="margin: 0 auto; width: 70%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">		
 			<p:messages id="mensajes" />
@@ -24,7 +27,7 @@
 				</f:facet>
 				
 				<p:outputLabel for="nombreEmisora" value="Nombre de la Emisora" />
-				<p:inputText id="nombreEmisora" value="#{parametrizacionEmisoraBean.nombreEmisora}" required="true" />
+				<p:inputText id="nombreEmisora" value="#{parametrizacionEmisoraBean.nombreEmisora}" required="true" autocomplete="off" />
 				<p:message for="nombreEmisora" display="icon" />
 				
 				<p:outputLabel for="modoDeTransmision" value="Modo de Transmisión" />
@@ -43,7 +46,7 @@
 				
 				<p:row>
 					<p:column styleClass="ui-grid-col-4">
-						<p:button outcome="index.xhtml" value="Ir a la página principal" styleClass="ui-button-raised ui-button-success ui-margin-right" />
+						<p:button outcome="paginaInicio.xhtml" value="Ir a Inicio" styleClass="ui-button-raised ui-button-success ui-margin-right" />
 					</p:column>
 					<p:column styleClass="ui-grid-col-4">
 						<p:commandButton value="Borrar" styleClass="ui-button-raised ui-button-success">

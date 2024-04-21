@@ -2,35 +2,72 @@ package co.edu.unbosque.model;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 
 import co.edu.unbosque.dao.EmisoraDAO;
 import co.edu.unbosque.dao.ModoTransmisionDAO;
 import co.edu.unbosque.dao.TipoMusicaDAO;
+import co.edu.unbosque.dto.EmisoraDTO;
 
 @ManagedBean
 public class ParametrizacionEmisoraBean {
-	
+
 	private EmisoraDAO gestorEmisoras;
 	private ModoTransmisionDAO gestorModosDeTransmision;
 	private TipoMusicaDAO gestorTiposDeMusica;
-	
+
 	private String nombreEmisora;
-	
+
 	private List<String> modosDeTransmision;
 	private String modoDeTransmision;
-	
+
 	private List<String> tiposDeMusica;
 	private String tipoDeMusica;
-	
+
 	public ParametrizacionEmisoraBean() {
 		gestorEmisoras = new EmisoraDAO();
 		gestorModosDeTransmision = new ModoTransmisionDAO();
 		gestorTiposDeMusica = new TipoMusicaDAO();
 	}
-	
-	public void crear() {
-		
+
+	public String crear() {
+		try {
+			int idModoDeTransmision = gestorModosDeTransmision.obtenerIdModoDeTransmision(getModoDeTransmision());
+			int idTipoDeMusica = gestorModosDeTransmision.obtenerIdModoDeTransmision(getModoDeTransmision());
+			if (gestorEmisoras.existeEmisora(getNombreEmisora())) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ya existe una emisora con ese nombre.", null));
+				return null;
+			}
+			gestorEmisoras.agregar(new EmisoraDTO(getNombreEmisora(), idModoDeTransmision, idTipoDeMusica));
+			return "paginaInicio.xhtml";
+		} catch (Exception e) {
+			redirigirAPaginaError(e.getMessage());
+			return "error.xhtml";
+		}
+	}
+
+	public void inicializarOpcionesSeleccionables(ComponentSystemEvent evento) {
+		try {
+			setModosDeTransmision(gestorModosDeTransmision.listarModosDeTransmision());
+			setTiposDeMusica(gestorTiposDeMusica.listarTiposDeMusica());
+		} catch (Exception e) {
+			redirigirAPaginaError(e.getMessage());
+		}
+	}
+
+	public void redirigirAPaginaError(String mensaje) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		externalContext.getSessionMap().put("mensajeError", mensaje);
+		try {
+			externalContext.redirect("error.xhtml");
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
 	}
 
 	public String getNombreEmisora() {
@@ -42,11 +79,6 @@ public class ParametrizacionEmisoraBean {
 	}
 
 	public List<String> getModosDeTransmision() {
-		try {
-			setModosDeTransmision(gestorModosDeTransmision.listarModosDeTransmision());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		return modosDeTransmision;
 	}
 
@@ -63,11 +95,6 @@ public class ParametrizacionEmisoraBean {
 	}
 
 	public List<String> getTiposDeMusica() {
-		try {
-			setTiposDeMusica(gestorTiposDeMusica.listarTiposDeMusica());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		return tiposDeMusica;
 	}
 
@@ -82,5 +109,5 @@ public class ParametrizacionEmisoraBean {
 	public void setTipoDeMusica(String tipoDeMusica) {
 		this.tipoDeMusica = tipoDeMusica;
 	}
-	
+
 }
