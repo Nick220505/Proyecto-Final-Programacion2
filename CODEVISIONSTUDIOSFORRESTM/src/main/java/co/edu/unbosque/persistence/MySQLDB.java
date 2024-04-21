@@ -21,7 +21,7 @@ public class MySQLDB<T extends Object> {
 				.buildSessionFactory();
 	}
 
-	public void ejecutarTransaccion(SessionMapper<T> sm) throws Exception {
+	public void ejecutarTransaccion(SessionMapper sm) throws Exception {
 		try (SessionFactory miFactory = crearSessionFactory();
 			 Session miSession = miFactory.openSession();) {
 			miSession.beginTransaction();
