@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Parametrización de Emisora</title>
+	<style>
+		button.ui-button {
+			margin: 10px;
+		}
+	</style>
+</h:head>
+<h:body>
+	<h:form>
+		<p:card style="margin: 0 auto; width: 70%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">		
+			<p:messages id="mensajes" />
+			<p:panelGrid id="panel" columns="3" layout="grid" columnClasses="ui-grid-col-4,ui-grid-col-7,ui-grid-col-1" styleClass="ui-panelgrid-blank ui-fluid">
+				<f:facet name="header">
+					<h1>Parametrización de Emisora</h1>
+				</f:facet>
+				
+				<p:outputLabel for="nombreEmisora" value="Nombre de la Emisora" />
+				<p:inputText id="nombreEmisora" value="#{parametrizacionEmisoraBean.nombreEmisora}" required="true" />
+				<p:message for="nombreEmisora" display="icon" />
+				
+				<p:outputLabel for="modoDeTransmision" value="Modo de Transmisión" />
+				<p:selectOneMenu id="modoDeTransmision" value="#{parametrizacionEmisoraBean.modoDeTransmision}" required="true">
+					<f:selectItem itemLabel="Seleccionar" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{parametrizacionEmisoraBean.modosDeTransmision}" />
+				</p:selectOneMenu>
+				<p:message for="modoDeTransmision" display="icon" />
+				
+				<p:outputLabel for="tipoDeMusica" value="Tipo de música transmitida" />
+				<p:selectOneMenu id="tipoDeMusica" value="#{parametrizacionEmisoraBean.tipoDeMusica}" required="true">
+					<f:selectItem itemLabel="Seleccionar" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{parametrizacionEmisoraBean.tiposDeMusica}" />
+				</p:selectOneMenu>
+				<p:message for="tipoDeMusica" display="icon" />
+				
+				<p:row>
+					<p:column styleClass="ui-grid-col-4">
+						<p:button outcome="index.xhtml" value="Ir a la página principal" styleClass="ui-button-raised ui-button-success ui-margin-right" />
+					</p:column>
+					<p:column styleClass="ui-grid-col-4">
+						<p:commandButton value="Borrar" styleClass="ui-button-raised ui-button-success">
+							<p:ajax update="panel" resetValues="true" />
+						</p:commandButton>				
+					</p:column>
+					<p:column styleClass="ui-grid-col-4">
+						<p:commandButton action="#{parametrizacionEmisoraBean.crear}" value="Crear" update="@form" styleClass="ui-button-raised ui-button-success" />				
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:card>
+	</h:form>
+</h:body>
+</html>
