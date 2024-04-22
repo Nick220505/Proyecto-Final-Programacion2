@@ -20,11 +20,11 @@ public class ModoTransmisionDAO extends Gestion<ModoTransmisionDTO> {
 	}
 
 	public void asignarModosDeTransmision() throws Exception {
-		List<String> existingModos = listar().stream().map(ModoTransmisionDTO::getModo).collect(Collectors.toList());
-		Set<String> modosToAdd = new HashSet<>(Arrays.asList("AM", "FM", "Streaming"));
-		modosToAdd.removeAll(existingModos);
+		List<String> modosExistentes = listar().stream().map(ModoTransmisionDTO::getModo).collect(Collectors.toList());
+		Set<String> modosAAgregar = new HashSet<>(Arrays.asList("AM", "FM", "Streaming"));
+		modosAAgregar.removeAll(modosExistentes);
 
-		for (String modo : modosToAdd) {
+		for (String modo : modosAAgregar) {
 			agregar(new ModoTransmisionDTO(modo));
 		}
 	}
