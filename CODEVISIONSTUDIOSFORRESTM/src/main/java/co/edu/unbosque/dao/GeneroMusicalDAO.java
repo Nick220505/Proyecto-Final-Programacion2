@@ -15,6 +15,7 @@ public class GeneroMusicalDAO extends Gestion<GeneroMusicalDTO> {
 	}
 
 	public List<String> listarGenerosMusicales() throws Exception {
+		asignarGenerosMusicales();
 		return listar().stream().map(GeneroMusicalDTO::getGenero).collect(Collectors.toList());
 	}
 

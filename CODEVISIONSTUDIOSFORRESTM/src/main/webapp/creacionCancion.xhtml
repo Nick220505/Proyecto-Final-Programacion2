@@ -35,6 +35,15 @@ button.ui-button {
 				<p:inputText id="artista" value="#{creacionCancionBean.artista}"
 					required="true" autocomplete="off" />
 				<p:message for="artista" display="icon" />
+				
+				<p:outputLabel for="generoMusical" value="Género Musical" />
+				<p:selectOneMenu id="generoMusical"
+					value="#{creacionCancionBean.generoMusical}" required="true">
+					<f:selectItem itemLabel="Seleccionar" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{creacionCancionBean.generosMusicales}" />
+				</p:selectOneMenu>
+				<p:message for="generoMusical" display="icon" />
 
 				<p:outputLabel for="url" value="URL de la Canción" />
 				<p:inputText id="url" value="#{creacionCancionBean.url}"
