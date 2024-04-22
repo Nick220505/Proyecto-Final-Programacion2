@@ -15,5 +15,9 @@ public class EmisoraDAO extends Gestion<EmisoraDTO> {
 	public int obtenerIdEmisoraActual() throws Exception {
 		return listar().get(0).getId();
 	}
+	
+	public EmisoraDTO obtenerEmisoraActual() throws Exception {
+		return listar().get(0);
+	}
 
 }

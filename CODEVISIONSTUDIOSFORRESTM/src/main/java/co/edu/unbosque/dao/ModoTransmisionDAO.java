@@ -32,5 +32,9 @@ public class ModoTransmisionDAO extends Gestion<ModoTransmisionDTO> {
 	public int obtenerIdModoDeTransmision(String modo) throws Exception {
 		return listar().stream().filter(mt -> mt.getModo().equals(modo)).findFirst().orElseThrow().getId();
 	}
+	
+	public String obtenerModo(int id) throws Exception {
+		return listar().stream().filter(mt -> mt.getId() == id).findFirst().orElseThrow().getModo();
+	}
 
 }

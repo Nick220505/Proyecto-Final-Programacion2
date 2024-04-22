@@ -26,13 +26,34 @@ public class ParametrizacionEmisoraBean {
 	private List<String> tiposDeMusica;
 	private String tipoDeMusica;
 
+	private String textoBotonEnviar;
+
 	public ParametrizacionEmisoraBean() {
 		gestorEmisoras = new EmisoraDAO();
 		gestorModosDeTransmision = new ModoTransmisionDAO();
 		gestorTiposDeMusica = new TipoMusicaDAO();
+
+		try {
+			if (gestorEmisoras.existeEmisora()) {
+
+				setNombreEmisora(gestorEmisoras.obtenerEmisoraActual().getNombre());
+
+				int idModoDeTransmisionActual = gestorEmisoras.obtenerEmisoraActual().getIdModoTransmision();
+				setModoDeTransmision(gestorModosDeTransmision.obtenerModo(idModoDeTransmisionActual));
+
+				int idTipoDeMusicaActual = gestorEmisoras.obtenerEmisoraActual().getIdTipoMusica();
+				setTipoDeMusica(gestorTiposDeMusica.obtenerTipo(idTipoDeMusicaActual));
+
+				textoBotonEnviar = "Actualizar";
+			} else {
+				textoBotonEnviar = "Crear";
+			}
+		} catch (Exception e) {
+			redirigirAPaginaError(e.getMessage());
+		}
 	}
 
-	public String crear() {
+	public String enviar() {
 		try {
 			int idModoDeTransmision = gestorModosDeTransmision.obtenerIdModoDeTransmision(getModoDeTransmision());
 			int idTipoDeMusica = gestorTiposDeMusica.obtenerIdTipoDeMusica(getTipoDeMusica());
@@ -49,6 +70,12 @@ public class ParametrizacionEmisoraBean {
 			redirigirAPaginaError(e.getMessage());
 			return "error.xhtml";
 		}
+	}
+
+	public void reiniciarEntradas() {
+		setNombreEmisora("");
+		setModoDeTransmision("");
+		setTipoDeMusica("");
 	}
 
 	public void redirigirAPaginaError(String mensaje) {
@@ -110,6 +137,14 @@ public class ParametrizacionEmisoraBean {
 
 	public void setTipoDeMusica(String tipoDeMusica) {
 		this.tipoDeMusica = tipoDeMusica;
+	}
+
+	public String getTextoBotonEnviar() {
+		return textoBotonEnviar;
+	}
+
+	public void setTextoBotonEnviar(String textoBotonEnviar) {
+		this.textoBotonEnviar = textoBotonEnviar;
 	}
 
 }

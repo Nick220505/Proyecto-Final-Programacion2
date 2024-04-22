@@ -9,49 +9,66 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>ForrestM - Parametrización de Emisora</title>
 	<style>
-		button.ui-button {
-			margin: 10px;
-		}
-	</style>
+button.ui-button {
+	margin: 10px;
+}
+</style>
 </h:head>
 <h:body>
 	<h:form>
-		<p:card style="margin: 0 auto; width: 70%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">		
+		<p:card
+			style="margin: 0 auto; width: 70%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
 			<p:messages id="mensajes" />
-			<p:panelGrid id="panel" columns="3" layout="grid" columnClasses="ui-grid-col-4,ui-grid-col-7,ui-grid-col-1" styleClass="ui-panelgrid-blank ui-fluid">
+			<p:panelGrid columns="3" layout="grid"
+				columnClasses="ui-grid-col-4,ui-grid-col-7,ui-grid-col-1"
+				styleClass="ui-panelgrid-blank ui-fluid">
 				<f:facet name="header">
 					<h1>Parametrización de Emisora</h1>
 				</f:facet>
-				
+
 				<p:outputLabel for="nombreEmisora" value="Nombre de la Emisora" />
-				<p:inputText id="nombreEmisora" value="#{parametrizacionEmisoraBean.nombreEmisora}" required="true" autocomplete="off" />
+				<p:inputText id="nombreEmisora"
+					value="#{parametrizacionEmisoraBean.nombreEmisora}" required="true"
+					autocomplete="off" />
 				<p:message for="nombreEmisora" display="icon" />
-				
+
 				<p:outputLabel for="modoDeTransmision" value="Modo de Transmisión" />
-				<p:selectOneMenu id="modoDeTransmision" value="#{parametrizacionEmisoraBean.modoDeTransmision}" required="true">
-					<f:selectItem itemLabel="Seleccionar" itemValue="" noSelectionOption="true" />
-					<f:selectItems value="#{parametrizacionEmisoraBean.modosDeTransmision}" />
+				<p:selectOneMenu id="modoDeTransmision"
+					value="#{parametrizacionEmisoraBean.modoDeTransmision}"
+					required="true">
+					<f:selectItem itemLabel="Seleccionar" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems
+						value="#{parametrizacionEmisoraBean.modosDeTransmision}" />
 				</p:selectOneMenu>
 				<p:message for="modoDeTransmision" display="icon" />
-				
+
 				<p:outputLabel for="tipoDeMusica" value="Tipo de música transmitida" />
-				<p:selectOneMenu id="tipoDeMusica" value="#{parametrizacionEmisoraBean.tipoDeMusica}" required="true">
-					<f:selectItem itemLabel="Seleccionar" itemValue="" noSelectionOption="true" />
+				<p:selectOneMenu id="tipoDeMusica"
+					value="#{parametrizacionEmisoraBean.tipoDeMusica}" required="true">
+					<f:selectItem itemLabel="Seleccionar" itemValue=""
+						noSelectionOption="true" />
 					<f:selectItems value="#{parametrizacionEmisoraBean.tiposDeMusica}" />
 				</p:selectOneMenu>
 				<p:message for="tipoDeMusica" display="icon" />
-				
+
 				<p:row>
 					<p:column styleClass="ui-grid-col-4">
-						<p:button outcome="paginaInicio.xhtml" value="Ir a Inicio" styleClass="ui-button-raised ui-button-success ui-margin-right" />
+						<p:button outcome="paginaInicio.xhtml" value="Ir a Inicio"
+							styleClass="ui-button-raised ui-button-success ui-margin-right" />
 					</p:column>
 					<p:column styleClass="ui-grid-col-4">
-						<p:commandButton value="Borrar" styleClass="ui-button-raised ui-button-success">
-							<p:ajax update="panel" resetValues="true" />
-						</p:commandButton>				
+						<p:commandButton value="Borrar"
+							styleClass="ui-button-raised ui-button-success">
+							<p:ajax update="@form"
+								listener="#{parametrizacionEmisoraBean.reiniciarEntradas}"
+								resetValues="true" />
+						</p:commandButton>
 					</p:column>
 					<p:column styleClass="ui-grid-col-4">
-						<p:commandButton action="#{parametrizacionEmisoraBean.crear}" value="Crear" update="@form" styleClass="ui-button-raised ui-button-success" />				
+						<p:commandButton action="#{parametrizacionEmisoraBean.enviar}"
+							value="#{parametrizacionEmisoraBean.textoBotonEnviar}"
+							update="@form" styleClass="ui-button-raised ui-button-success" />
 					</p:column>
 				</p:row>
 			</p:panelGrid>

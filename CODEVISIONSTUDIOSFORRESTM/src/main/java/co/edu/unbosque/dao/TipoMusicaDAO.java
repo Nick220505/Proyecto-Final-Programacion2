@@ -32,5 +32,9 @@ public class TipoMusicaDAO extends Gestion<TipoMusicaDTO> {
 	public int obtenerIdTipoDeMusica(String tipo) throws Exception {
 		return listar().stream().filter(tm -> tm.getTipo().equals(tipo)).findFirst().orElseThrow().getId();
 	}
+	
+	public String obtenerTipo(int id) throws Exception {
+		return listar().stream().filter(tm -> tm.getId() == id).findFirst().orElseThrow().getTipo();
+	}
 
 }
