@@ -8,4 +8,8 @@ public class ArtistaDAO extends Gestion<ArtistaDTO> {
 		super(ArtistaDTO.class);
 	}
 
+	public boolean existeArtista(String nombre) throws Exception {
+		return listar().stream().anyMatch(a -> a.getNombre().equalsIgnoreCase(nombre));
+	}
+
 }
