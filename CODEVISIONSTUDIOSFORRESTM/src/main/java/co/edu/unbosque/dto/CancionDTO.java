@@ -18,8 +18,8 @@ public class CancionDTO {
 	@Column(name = "nombre")
 	private String nombre;
 
-	@Column(name = "nombre_archivo")
-	private String nombreArchivo;
+	@Column(name = "url")
+	private String url;
 
 	@Column(name = "id_emisora")
 	private int idEmisora;
@@ -29,17 +29,17 @@ public class CancionDTO {
 
 	public CancionDTO() {}
 
-	public CancionDTO(String nombre, String nombreArchivo, int idEmisora, int idGeneroMusical) {
+	public CancionDTO(String nombre, String url, int idEmisora, int idGeneroMusical) {
 		this.nombre = nombre;
-		this.nombreArchivo = nombreArchivo;
+		this.url = url;
 		this.idEmisora = idEmisora;
 		this.idGeneroMusical = idGeneroMusical;
 	}
 
 	@Override
 	public String toString() {
-		return "CancionDTO [id=" + id + ", nombre=" + nombre + ", nombreArchivo=" + nombreArchivo + ", idEmisora="
-				+ idEmisora + ", idGeneroMusical=" + idGeneroMusical + "]";
+		return "CancionDTO [id=" + id + ", nombre=" + nombre + ", url=" + url + ", idEmisora=" + idEmisora
+				+ ", idGeneroMusical=" + idGeneroMusical + "]";
 	}
 
 	public int getId() {
@@ -58,12 +58,12 @@ public class CancionDTO {
 		this.nombre = nombre;
 	}
 
-	public String getNombreArchivo() {
-		return nombreArchivo;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setNombreArchivo(String nombreArchivo) {
-		this.nombreArchivo = nombreArchivo;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public int getIdEmisora() {
