@@ -45,7 +45,7 @@ CREATE TABLE `generos_musicales` (
 CREATE TABLE `canciones` (
     `id` INT AUTO_INCREMENT,
     `nombre` VARCHAR(64) NOT NULL,
-    `nombre_archivo` VARCHAR(2048) NOT NULL,
+    `url` VARCHAR(2048) NOT NULL,
     `id_emisora` INT,
     `id_genero_musical` INT,
     PRIMARY KEY(`id`),
