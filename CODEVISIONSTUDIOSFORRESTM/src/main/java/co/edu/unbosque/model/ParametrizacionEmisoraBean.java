@@ -2,11 +2,9 @@ package co.edu.unbosque.model;
 
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ComponentSystemEvent;
 
 import co.edu.unbosque.dao.EmisoraDAO;
 import co.edu.unbosque.dao.ModoTransmisionDAO;
@@ -37,25 +35,19 @@ public class ParametrizacionEmisoraBean {
 	public String crear() {
 		try {
 			int idModoDeTransmision = gestorModosDeTransmision.obtenerIdModoDeTransmision(getModoDeTransmision());
-			int idTipoDeMusica = gestorModosDeTransmision.obtenerIdModoDeTransmision(getModoDeTransmision());
-			if (gestorEmisoras.existeEmisora(getNombreEmisora())) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ya existe una emisora con ese nombre.", null));
-				return null;
+			int idTipoDeMusica = gestorTiposDeMusica.obtenerIdTipoDeMusica(getTipoDeMusica());
+			if (!gestorEmisoras.existeEmisora()) {
+				gestorEmisoras.agregar(new EmisoraDTO(getNombreEmisora(), idModoDeTransmision, idTipoDeMusica));
+			} else {
+				int idEmisoraActual = gestorEmisoras.obtenerIdEmisoraActual();
+				EmisoraDTO nuevaEmisora = new EmisoraDTO(getNombreEmisora(), idModoDeTransmision, idTipoDeMusica);
+				nuevaEmisora.setId(idEmisoraActual);
+				gestorEmisoras.actualizar(idEmisoraActual, nuevaEmisora);
 			}
-			gestorEmisoras.agregar(new EmisoraDTO(getNombreEmisora(), idModoDeTransmision, idTipoDeMusica));
 			return "paginaInicio.xhtml";
 		} catch (Exception e) {
 			redirigirAPaginaError(e.getMessage());
 			return "error.xhtml";
-		}
-	}
-
-	public void inicializarOpcionesSeleccionables(ComponentSystemEvent evento) {
-		try {
-			setModosDeTransmision(gestorModosDeTransmision.listarModosDeTransmision());
-			setTiposDeMusica(gestorTiposDeMusica.listarTiposDeMusica());
-		} catch (Exception e) {
-			redirigirAPaginaError(e.getMessage());
 		}
 	}
 
@@ -79,6 +71,11 @@ public class ParametrizacionEmisoraBean {
 	}
 
 	public List<String> getModosDeTransmision() {
+		try {
+			setModosDeTransmision(gestorModosDeTransmision.listarModosDeTransmision());
+		} catch (Exception e) {
+			redirigirAPaginaError(e.getMessage());
+		}
 		return modosDeTransmision;
 	}
 
@@ -95,6 +92,11 @@ public class ParametrizacionEmisoraBean {
 	}
 
 	public List<String> getTiposDeMusica() {
+		try {
+			setTiposDeMusica(gestorTiposDeMusica.listarTiposDeMusica());
+		} catch (Exception e) {
+			redirigirAPaginaError(e.getMessage());
+		}
 		return tiposDeMusica;
 	}
 

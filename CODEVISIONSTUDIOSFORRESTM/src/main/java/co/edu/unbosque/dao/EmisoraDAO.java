@@ -8,8 +8,12 @@ public class EmisoraDAO extends Gestion<EmisoraDTO> {
 		super(EmisoraDTO.class);
 	}
 	
-	public boolean existeEmisora(String nombre) throws Exception {
-		return listar().stream().anyMatch(e -> e.getNombre().equals(nombre));
+	public boolean existeEmisora() throws Exception {
+		return listar().size() > 0;
+	}
+	
+	public int obtenerIdEmisoraActual() throws Exception {
+		return listar().get(0).getId();
 	}
 
 }
