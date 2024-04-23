@@ -28,5 +28,9 @@ public class GeneroMusicalDAO extends Gestion<GeneroMusicalDTO> {
 			agregar(new GeneroMusicalDTO(genero));
 		}
 	}
+	
+	public int obtenerGeneroMusical(String genero) throws Exception {
+		return listar().stream().filter(gm -> gm.getGenero().equals(genero)).findFirst().orElseThrow().getId();
+	}
 
 }

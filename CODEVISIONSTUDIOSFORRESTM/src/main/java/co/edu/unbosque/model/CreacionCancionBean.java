@@ -9,14 +9,18 @@ import javax.faces.context.FacesContext;
 import co.edu.unbosque.dao.ArtistaDAO;
 import co.edu.unbosque.dao.ArtistaYCancionDAO;
 import co.edu.unbosque.dao.CancionDAO;
+import co.edu.unbosque.dao.EmisoraDAO;
 import co.edu.unbosque.dao.GeneroMusicalDAO;
 import co.edu.unbosque.dto.ArtistaDTO;
+import co.edu.unbosque.dto.ArtistaYCancionDTO;
+import co.edu.unbosque.dto.CancionDTO;
 
 @ManagedBean
 public class CreacionCancionBean {
 
 	private GeneroMusicalDAO gestorGenerosMusicales;
 	private CancionDAO gestorCanciones;
+	private EmisoraDAO gestorEmisoras;
 	private ArtistaDAO gestorArtistas;
 	private ArtistaYCancionDAO gestorCancionesYArtistas;
 
@@ -31,6 +35,7 @@ public class CreacionCancionBean {
 	public CreacionCancionBean() {
 		gestorGenerosMusicales = new GeneroMusicalDAO();
 		gestorCanciones = new CancionDAO();
+		gestorEmisoras = new EmisoraDAO();
 		gestorArtistas = new ArtistaDAO();
 		gestorCancionesYArtistas = new ArtistaYCancionDAO();
 	}
@@ -39,6 +44,18 @@ public class CreacionCancionBean {
 
 		try {
 			gestorArtistas.agregar(new ArtistaDTO(getArtista()));
+			int idEmisoraActual, idGeneroMusical = 0;
+			try {
+				System.out.println("Pasando por emisora");
+				idEmisoraActual = gestorEmisoras.obtenerIdEmisoraActual();
+			} catch (Exception e) {
+				return null;
+			}
+			idGeneroMusical = gestorGenerosMusicales.obtenerGeneroMusical(getGeneroMusical());
+			gestorCanciones.agregar(new CancionDTO(getNombre(), getUrl(), idEmisoraActual, idGeneroMusical));				
+			int idArtista = gestorArtistas.obtenerIdArtista(getArtista());
+			int idCancion = gestorCanciones.obtenerIdCancion(getUrl());
+			gestorCancionesYArtistas.agregar(new ArtistaYCancionDTO(idArtista, idCancion));
 		} catch (Exception e) {
 			redirigirAPaginaError(e.getMessage());
 		}
