@@ -37,7 +37,7 @@ CREATE TABLE `artistas` (
 );
 
 CREATE TABLE `generos_musicales` (
-    `id` INT,
+    `id` INT AUTO_INCREMENT,
     `genero` VARCHAR(64) NOT NULL,
     PRIMARY KEY(`id`)
 );
