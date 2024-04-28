@@ -34,6 +34,16 @@ public class PistaMusicalAPI {
 		return pistaMusicalDAO.findAll();
 	}
 
+	@GetMapping("/listar-disponibles")
+	public List<PistaMusical> listarDisponibles() {
+		return pistaMusicalDAO.findAll().stream().filter(pista -> !pista.isAgregada()).toList();
+	}
+
+	@GetMapping("/listar-agregadas")
+	public List<PistaMusical> listarAgregadas() {
+		return pistaMusicalDAO.findAll().stream().filter(PistaMusical::isAgregada).toList();
+	}
+
 	@PutMapping("/actualizar")
 	public void actualizar(@RequestBody PistaMusical pistaMusical) {
 		pistaMusicalDAO.save(pistaMusical);

@@ -1,5 +1,6 @@
 package co.edu.unbosque.forrestmback.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -21,6 +22,9 @@ public class PistaMusical {
 	private GeneroMusical generoMusical;
 
 	private String url;
+
+	@Column(columnDefinition = "boolean default false")
+	private boolean agregada;
 
 	public int getId() {
 		return id;
@@ -60,6 +64,14 @@ public class PistaMusical {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public boolean isAgregada() {
+		return agregada;
+	}
+
+	public void setAgregada(boolean agregada) {
+		this.agregada = agregada;
 	}
 
 }

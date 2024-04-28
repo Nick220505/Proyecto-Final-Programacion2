@@ -19,34 +19,34 @@
 	<f:metadata>
 		<f:viewAction action="#{programacionBean.onLoad}" />
 	</f:metadata>
-	<p:panel
-		style="text-align: center; margin-bottom: 20px;">
+	<p:panel style="text-align: center; margin-bottom: 20px;">
 		<h1>Bienvenido a la Programación del Día</h1>
 	</p:panel>
 	<h:form>
-		<p:fieldset id="pistasMusicales" legend="Pistas Musicales Disponibles">		
-			<p:dataTable var="pistaMusical"
-				value="#{programacionBean.pistasMusicales}" id="tablaPistasMusicales">
+		<p:fieldset id="pistasMusicales" legend="Pistas Musicales Disponibles">
+			<p:dataTable var="pistaMusicalDisponible"
+				value="#{programacionBean.pistasMusicalesDisponibles}"
+				id="tablaPistasMusicales">
 				<p:column style="width: 20px;">
 					<h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
 					<p:draggable for="dragIcon" revert="true" helper="clone" />
 				</p:column>
-	
+
 				<p:column headerText="Nombre de la Pista Musical">
-					<h:outputText value="#{pistaMusical['nombre']}" />
+					<h:outputText value="#{pistaMusicalDisponible['nombre']}" />
 				</p:column>
-	
+
 				<p:column headerText="Nombre del Artista">
-					<h:outputText value="#{pistaMusical['nombreDelArtista']}" />
+					<h:outputText value="#{pistaMusicalDisponible['nombreDelArtista']}" />
 				</p:column>
-	
-	
+
+
 				<p:column headerText="Género Musical">
-					<h:outputText value="#{pistaMusical['generoMusical']}" />
+					<h:outputText value="#{pistaMusicalDisponible['generoMusical']}" />
 				</p:column>
-	
+
 				<p:column headerText="URL de la Pista Musical">
-					<h:outputText value="#{pistaMusical['url']}" />
+					<h:outputText value="#{pistaMusicalDisponible['url']}" />
 				</p:column>
 			</p:dataTable>
 		</p:fieldset>
@@ -80,15 +80,15 @@
 			</p:outputPanel>
 		</p:fieldset>
 
-		<p:droppable for="pistasMusicalesAgregadas" tolerance="touch"
+		<p:droppable for="@previous" tolerance="touch"
 			activeStyleClass="ui-state-highlight"
 			datasource="tablaPistasMusicales" onDrop="handleDrop">
 			<p:ajax listener="#{programacionBean.onDrop}"
 				update="tablaPistasMusicales dropArea" />
 		</p:droppable>
-		
+
 	</h:form>
-	<div style="text-align: center; margin-top: 20px;">	
+	<div style="text-align: center; margin-top: 20px;">
 		<p:button outcome="index.xhtml" value="Ir a Inicio" />
 	</div>
 </h:body>
