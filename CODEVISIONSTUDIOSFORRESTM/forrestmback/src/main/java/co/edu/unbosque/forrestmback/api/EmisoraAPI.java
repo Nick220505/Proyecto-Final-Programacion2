@@ -28,6 +28,11 @@ public class EmisoraAPI {
 	public void guardar(@RequestBody Emisora emisora) {
 		emisoraDAO.save(emisora);
 	}
+	
+	@GetMapping("/obtener/{id}")
+	public Emisora obtener(@PathVariable Integer id) {
+		return emisoraDAO.findById(id).get();
+	}
 
 	@GetMapping("/listar")
 	public List<Emisora> listar() {
