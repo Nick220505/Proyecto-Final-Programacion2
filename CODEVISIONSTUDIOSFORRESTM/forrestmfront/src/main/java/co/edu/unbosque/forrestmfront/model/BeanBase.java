@@ -19,17 +19,6 @@ public abstract class BeanBase {
 	private static final HttpHeaders headers = new HttpHeaders();
 	private static HttpEntity<String> entity;
 
-	protected void redirigirAPaginaError(String mensaje) {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ExternalContext externalContext = facesContext.getExternalContext();
-		externalContext.getSessionMap().put("mensajeError", mensaje);
-		try {
-			externalContext.redirect("error.xhtml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	protected JSONArray getJSON(String mapping) throws Exception {
 		String json = restTemplate.getForObject(url + mapping, String.class);
 		return new JSONArray(json);
@@ -54,4 +43,16 @@ public abstract class BeanBase {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		entity = new HttpEntity<>(jsonObject.toString(), headers);
 	}
+
+	protected void redirigirAPaginaError(String mensaje) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		externalContext.getSessionMap().put("mensajeError", mensaje);
+		try {
+			externalContext.redirect("error.xhtml");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
