@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>ForrestM - Programación del Día</title>
+	<script>
+		function handleDrop(event, ui) {
+			var pistaMusicalArrastrada = ui.draggable;
+			pistaMusicalArrastrada.fadeOut('fast');
+		}
+	</script>
+</h:head>
+<h:body>
+	<f:metadata>
+		<f:viewAction action="#{programacionBean.onLoad}" />
+	</f:metadata>
+	<h1>Bienvenido a la Programación del Día</h1>
+	<h:form>
+		<h5 class="mt-0">Pistas Musicales Disponibles</h5>
+		<p:dataTable var="pistaMusical"
+			value="#{programacionBean.pistasMusicales}" id="tablaPistasMusicales">
+			<p:column style="width: 20px;">
+				<h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
+				<p:draggable for="dragIcon" revert="true" helper="clone" />
+			</p:column>
+
+			<p:column headerText="Nombre de la Pista Musical">
+				<h:outputText value="#{pistaMusical['nombre']}" />
+			</p:column>
+
+			<p:column headerText="Nombre del Artista">
+				<h:outputText value="#{pistaMusical['nombreDelArtista']}" />
+			</p:column>
+
+
+			<p:column headerText="Género Musical">
+				<h:outputText value="#{pistaMusical['generoMusical']}" />
+			</p:column>
+
+			<p:column headerText="URL de la Pista Musical">
+				<h:outputText value="#{pistaMusical['url']}" />
+			</p:column>
+		</p:dataTable>
+
+		<p:fieldset id="pistasMusicalesAgregadas" legend="Tu lista de hoy">
+			<p:outputPanel id="dropArea">
+				<h:outputText value="Arrastra Pistas Musicales aquí"
+					rendered="#{empty programacionBean.pistasMusicalesAgregadas}"
+					style="font-size: 1.5rem;"></h:outputText>
+				<p:dataTable var="pistaMusicalAgregada"
+					value="#{programacionBean.pistasMusicalesAgregadas}"
+					id="tablaPistasMusicalesAgregadas"
+					rendered="#{not empty programacionBean.pistasMusicalesAgregadas}">
+
+					<p:column headerText="Nombre de la Pista Musical">
+						<h:outputText value="#{pistaMusicalAgregada['nombre']}" />
+					</p:column>
+
+					<p:column headerText="Nombre del Artista">
+						<h:outputText value="#{pistaMusicalAgregada['nombreDelArtista']}" />
+					</p:column>
+
+					<p:column headerText="Género Musical">
+						<h:outputText value="#{pistaMusicalAgregada['generoMusical']}" />
+					</p:column>
+
+					<p:column headerText="URL de la Pista Musical">
+						<h:outputText value="#{pistaMusicalAgregada['url']}" />
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+		</p:fieldset>
+
+		<p:droppable for="pistasMusicalesAgregadas" tolerance="touch"
+			activeStyleClass="ui-state-highlight"
+			datasource="tablaPistasMusicales" onDrop="handleDrop">
+			<p:ajax listener="#{programacionBean.onDrop}"
+				update="tablaPistasMusicales dropArea" />
+		</p:droppable>
+	</h:form>
+</h:body>
+</html>

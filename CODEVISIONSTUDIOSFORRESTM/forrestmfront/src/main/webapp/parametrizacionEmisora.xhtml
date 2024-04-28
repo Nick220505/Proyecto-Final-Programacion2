@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>ForrestM - Parametrización de Emisora</title>
+	<style>
+		button.ui-button {
+			margin: 10px;
+		}
+	</style>
+</h:head>
+<h:body>
+	<f:metadata>
+		<f:viewAction action="#{emisoraBean.onLoad}" />
+	</f:metadata>
+	<h:form>
+		<h:inputHidden id="idEmisora" value="#{emisoraBean.id}" />
+		<p:card
+			style="margin: 0 auto; width: 70%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+			<p:messages id="mensajes" />
+			<p:panelGrid columns="3" layout="grid"
+				columnClasses="ui-grid-col-4,ui-grid-col-7,ui-grid-col-1"
+				styleClass="ui-panelgrid-blank ui-fluid" id="panelEntrada">
+				<f:facet name="header">
+					<h1>Parametrización de Emisora</h1>
+				</f:facet>
+
+				<p:outputLabel for="@next" value="Nombre de la Emisora" />
+				<p:inputText id="nombre" value="#{emisoraBean.nombre}"
+					required="true" autocomplete="off" />
+				<p:message for="@previous" display="icon" />
+
+				<p:outputLabel for="@next" value="Modo de Transmisión" />
+				<p:selectOneMenu id="modoDeTransmision"
+					value="#{emisoraBean.modoDeTransmision}" required="true">
+					<f:selectItem itemLabel="Seleccionar" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItem itemLabel="AM" itemValue="AM" />
+					<f:selectItem itemLabel="FM" itemValue="FM" />
+					<f:selectItem itemLabel="Streaming" itemValue="STREAMING" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="icon" />
+
+				<p:outputLabel for="@next" value="Tipo de música transmitida" />
+				<p:selectOneMenu id="tipoDeMusica"
+					value="#{emisoraBean.tipoDeMusica}" required="true">
+					<f:selectItem itemLabel="Seleccionar" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItem itemLabel="Rock" itemValue="ROCK" />
+					<f:selectItem itemLabel="De Planchar" itemValue="DE_PLANCHAR" />
+					<f:selectItem itemLabel="Reguetón" itemValue="REGUETÓN" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="icon" />
+			</p:panelGrid>
+			<p:panelGrid columns="3" layout="grid"
+				columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
+				styleClass="ui-panelgrid-blank ui-fluid">
+				<p:button outcome="index.xhtml" value="Ir a Inicio"
+					styleClass="ui-button-raised ui-button-success ui-margin-right" />
+				<p:commandButton value="Borrar"
+					styleClass="ui-button-raised ui-button-success">
+					<p:ajax update="mensajes, panelEntrada" resetValues="true" />
+				</p:commandButton>
+				<p:commandButton action="#{emisoraBean.enviar}"
+					value="#{emisoraBean.textoBotonEnviar}"
+					update="mensajes, panelEntrada"
+					styleClass="ui-button-raised ui-button-success" />
+			</p:panelGrid>
+		</p:card>
+	</h:form>
+</h:body>
+</html>

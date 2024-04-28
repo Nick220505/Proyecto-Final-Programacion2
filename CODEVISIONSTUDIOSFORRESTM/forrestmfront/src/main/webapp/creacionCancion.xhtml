@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>ForrestM - Creación de Pista Musical</title>
+	<style>
+		button.ui-button {
+			margin: 10px;
+		}
+	</style>
+</h:head>
+<h:body>
+	<h:form>
+		<p:card
+			style="margin: 0 auto; width: 70%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+			<p:messages id="mensajes" />
+			<p:panelGrid columns="3" layout="grid"
+				columnClasses="ui-grid-col-4,ui-grid-col-7,ui-grid-col-1"
+				styleClass="ui-panelgrid-blank ui-fluid" id="panelEntrada">
+				<f:facet name="header">
+					<h1>Creación de Pista Musical</h1>
+				</f:facet>
+
+				<p:outputLabel for="@next" value="Nombre de la Pista Musical" />
+				<p:inputText id="nombre" value="#{pistaMusicalBean.nombre}"
+					required="true" autocomplete="off" />
+				<p:message for="@previous" display="icon" />
+
+				<p:outputLabel for="@next" value="Nombre del Artista" />
+				<p:inputText id="artista"
+					value="#{pistaMusicalBean.nombreDelArtista}" required="true"
+					autocomplete="off" />
+				<p:message for="@previous" display="icon" />
+
+				<p:outputLabel for="@next" value="Género Musical" />
+				<p:selectOneMenu id="generoMusical"
+					value="#{pistaMusicalBean.generoMusical}" required="true">
+					<f:selectItem itemLabel="Seleccionar" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItem itemLabel="Rock" itemValue="ROCK" />
+					<f:selectItem itemLabel="Reguetón" itemValue="REGUETÓN" />
+					<f:selectItem itemLabel="Pop" itemValue="POP" />
+					<f:selectItem itemLabel="Country" itemValue="COUNTRY" />
+					<f:selectItem itemLabel="Jazz" itemValue="JAZZ" />
+					<f:selectItem itemLabel="Rap" itemValue="RAP" />
+					<f:selectItem itemLabel="Hip Hop" itemValue="HIP_HOP" />
+				</p:selectOneMenu>
+				<p:message for="@previous" display="icon" />
+
+				<p:outputLabel for="@next" value="URL de la Canción" />
+				<p:inputText id="url" value="#{pistaMusicalBean.url}"
+					required="true" autocomplete="off" />
+				<p:message for="@previous" display="icon" />
+			</p:panelGrid>
+
+			<p:panelGrid columns="3" layout="grid"
+				columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
+				styleClass="ui-panelgrid-blank ui-fluid">
+				<p:button outcome="index.xhtml" value="Ir a Inicio"
+					styleClass="ui-button-raised ui-button-success ui-margin-right" />
+				<p:commandButton value="Borrar"
+					styleClass="ui-button-raised ui-button-success">
+					<p:ajax update="mensajes, panelEntrada" resetValues="true" />
+				</p:commandButton>
+				<p:commandButton action="#{pistaMusicalBean.enviar}" value="Guardar"
+					update="mensajes, panelEntrada"
+					styleClass="ui-button-raised ui-button-success" />
+			</p:panelGrid>
+		</p:card>
+	</h:form>
+</h:body>
+</html>

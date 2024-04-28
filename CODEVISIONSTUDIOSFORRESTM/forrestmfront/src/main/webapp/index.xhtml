@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>ForrestM - Página de Gestión</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel
+			style="text-align: center;">
+			<h1>ForrestM - Página de Gestión</h1>
+		</p:panel>
+
+		<p:panel header="¡Bienvenido a ForrestM!" style="margin-top: 20px;">
+			<p>¡Aquí puedes gestionar todo sobre tu emisora!</p>
+			<p>¿Qué te gustaría hacer hoy?</p>
+
+			<p:graphicImage name="/resources/imagen_ForrestM.jpg" />
+
+			<div style="text-align: right;">
+				<p:commandButton value="Gestionar Programación" />
+				<p:commandButton value="Crea tu cancion!" />
+				<p:commandButton value="Configura tu emisora!" />
+			</div>
+		</p:panel>
+
+		<p:panel header="Algunas de nuestras obras!" style="margin-top: 20px;">
+			<p:graphicImage name="/resources/cancion1.jpg" />
+			<p:graphicImage name="/resources/cancion2.jpg" />
+			<p:graphicImage name="/resources/cancion3.jpg" />
+		</p:panel>
+
+		<p:panel
+			style="text-align: center;">
+			<p>ForrestM - Todos los derechos reservados</p>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
