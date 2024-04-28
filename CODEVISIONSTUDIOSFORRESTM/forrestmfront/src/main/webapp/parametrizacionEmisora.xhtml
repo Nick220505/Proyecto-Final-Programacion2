@@ -19,7 +19,6 @@
 		<f:viewAction action="#{emisoraBean.onLoad}" />
 	</f:metadata>
 	<h:form>
-		<h:inputHidden id="idEmisora" value="#{emisoraBean.id}" />
 		<p:card
 			style="margin: 0 auto; width: 70%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
 			<p:messages id="mensajes" />
@@ -31,13 +30,13 @@
 				</f:facet>
 
 				<p:outputLabel for="@next" value="Nombre de la Emisora" />
-				<p:inputText id="nombre" value="#{emisoraBean.nombre}"
+				<p:inputText id="nombre" value="#{emisoraBean.emisora['nombre']}"
 					required="true" autocomplete="off" />
 				<p:message for="@previous" display="icon" />
 
 				<p:outputLabel for="@next" value="Modo de Transmisión" />
 				<p:selectOneMenu id="modoDeTransmision"
-					value="#{emisoraBean.modoDeTransmision}" required="true">
+					value="#{emisoraBean.emisora['modoDeTransmision']}" required="true">
 					<f:selectItem itemLabel="Seleccionar" itemValue=""
 						noSelectionOption="true" />
 					<f:selectItem itemLabel="AM" itemValue="AM" />
@@ -48,7 +47,7 @@
 
 				<p:outputLabel for="@next" value="Tipo de música transmitida" />
 				<p:selectOneMenu id="tipoDeMusica"
-					value="#{emisoraBean.tipoDeMusica}" required="true">
+					value="#{emisoraBean.emisora['tipoDeMusica']}" required="true">
 					<f:selectItem itemLabel="Seleccionar" itemValue=""
 						noSelectionOption="true" />
 					<f:selectItem itemLabel="Rock" itemValue="ROCK" />
@@ -64,7 +63,8 @@
 					styleClass="ui-button-raised ui-button-success ui-margin-right" />
 				<p:commandButton value="Borrar"
 					styleClass="ui-button-raised ui-button-success">
-					<p:ajax update="mensajes, panelEntrada" resetValues="true" />
+					<p:ajax listener="#{emisoraBean.reiniciarEntradas}"
+						update="mensajes, panelEntrada" resetValues="true" />
 				</p:commandButton>
 				<p:commandButton action="#{emisoraBean.enviar}"
 					value="#{emisoraBean.textoBotonEnviar}"

@@ -4,23 +4,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "pistaMusicalBean")
+@SessionScoped
 public class CreacionPistaMusicalBean extends BeanBase {
 
-	private String nombre;
-	private String nombreDelArtista;
-	private String generoMusical;
-	private String url;
+	private Map<String, Object> pistaMusical;
+
+	public void onLoad() {
+		pistaMusical = new HashMap<>();
+	}
 
 	public String enviar() {
 		try {
-			Map<String, Object> datosPistaMusical = new HashMap<>();
-			datosPistaMusical.put("nombre", getNombre());
-			datosPistaMusical.put("nombreDelArtista", getNombreDelArtista());
-			datosPistaMusical.put("generoMusical", getGeneroMusical());
-			datosPistaMusical.put("url", getUrl());
-			super.postJSON(datosPistaMusical, "pistas/guardar");
+			super.postJSON(pistaMusical, "pistas/guardar");
 			return "programacionDelDia.xhtml?faces-redirect=true";
 		} catch (Exception e) {
 			redirigirAPaginaError(e.getMessage());
@@ -28,36 +26,16 @@ public class CreacionPistaMusicalBean extends BeanBase {
 		}
 	}
 
-	public String getNombre() {
-		return nombre;
+	public void reiniciarEntradas() {
+		pistaMusical.forEach((key, value) -> pistaMusical.put(key, ""));
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public Map<String, Object> getPistaMusical() {
+		return pistaMusical;
 	}
 
-	public String getNombreDelArtista() {
-		return nombreDelArtista;
-	}
-
-	public void setNombreDelArtista(String nombreDelArtista) {
-		this.nombreDelArtista = nombreDelArtista;
-	}
-
-	public String getGeneroMusical() {
-		return generoMusical;
-	}
-
-	public void setGeneroMusical(String generoMusical) {
-		this.generoMusical = generoMusical;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
+	public void setPistaMusical(Map<String, Object> pistaMusical) {
+		this.pistaMusical = pistaMusical;
 	}
 
 }

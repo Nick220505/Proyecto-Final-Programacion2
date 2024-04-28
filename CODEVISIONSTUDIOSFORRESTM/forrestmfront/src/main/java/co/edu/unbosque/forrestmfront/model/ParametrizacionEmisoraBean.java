@@ -1,32 +1,25 @@
 package co.edu.unbosque.forrestmfront.model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "emisoraBean")
+@SessionScoped
 public class ParametrizacionEmisoraBean extends BeanBase {
 
-	private int id;
-	private String nombre;
-	private String modoDeTransmision;
-	private String tipoDeMusica;
-
+	private Map<String, Object> emisora;
 	private String textoBotonEnviar;
 
 	public void onLoad() {
+		emisora = new HashMap<>();
 		try {
-			JSONArray arrayEmisoras = super.getJSON("emisoras/listar");
-			if (arrayEmisoras.length() > 0) {
-				JSONObject emisoraExistente = arrayEmisoras.getJSONObject(0);
-				setId(emisoraExistente.getInt("id"));
-				setNombre(emisoraExistente.getString("nombre"));
-				setModoDeTransmision(emisoraExistente.getString("modoDeTransmision"));
-				setTipoDeMusica(emisoraExistente.getString("tipoDeMusica"));
+			List<Map<String, Object>> emisoras = super.getJSONList("emisoras/listar");
+			if (emisoras.size() > 0) {
+				emisora = super.getJSONObject("emisoras/obtener/" + emisoras.get(0).get("id"));
 				setTextoBotonEnviar("Actualizar");
 			} else {
 				setTextoBotonEnviar("Guardar");
@@ -38,15 +31,10 @@ public class ParametrizacionEmisoraBean extends BeanBase {
 
 	public String enviar() {
 		try {
-			Map<String, Object> datosEmisora = new HashMap<>();
-			datosEmisora.put("nombre", getNombre());
-			datosEmisora.put("modoDeTransmision", getModoDeTransmision());
-			datosEmisora.put("tipoDeMusica", getTipoDeMusica());
-			if (super.getJSON("emisoras/listar").length() > 0) {
-				datosEmisora.put("id", getId());
-				super.putJSON(datosEmisora, "emisoras/actualizar");
+			if (super.getJSONList("emisoras/listar").size() > 0) {
+				super.postJSON(emisora, "emisoras/guardar");
 			} else {
-				super.postJSON(datosEmisora, "emisoras/guardar");
+				super.putJSON(emisora, "emisoras/actualizar");
 			}
 			return "index.xhtml?faces-redirect=true";
 		} catch (Exception e) {
@@ -55,36 +43,16 @@ public class ParametrizacionEmisoraBean extends BeanBase {
 		}
 	}
 
-	public int getId() {
-		return id;
+	public void reiniciarEntradas() {
+		emisora.forEach((key, value) -> emisora.put(key, ""));
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public Map<String, Object> getEmisora() {
+		return emisora;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getModoDeTransmision() {
-		return modoDeTransmision;
-	}
-
-	public void setModoDeTransmision(String modoDeTransmision) {
-		this.modoDeTransmision = modoDeTransmision;
-	}
-
-	public String getTipoDeMusica() {
-		return tipoDeMusica;
-	}
-
-	public void setTipoDeMusica(String tipoDeMusica) {
-		this.tipoDeMusica = tipoDeMusica;
+	public void setEmisora(Map<String, Object> emisora) {
+		this.emisora = emisora;
 	}
 
 	public String getTextoBotonEnviar() {

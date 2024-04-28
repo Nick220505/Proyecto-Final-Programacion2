@@ -15,6 +15,9 @@
 	</style>
 </h:head>
 <h:body>
+	<f:metadata>
+		<f:viewAction action="#{pistaMusicalBean.onLoad}" />
+	</f:metadata>
 	<h:form>
 		<p:card
 			style="margin: 0 auto; width: 70%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
@@ -27,19 +30,21 @@
 				</f:facet>
 
 				<p:outputLabel for="@next" value="Nombre de la Pista Musical" />
-				<p:inputText id="nombre" value="#{pistaMusicalBean.nombre}"
-					required="true" autocomplete="off" />
+				<p:inputText id="nombre"
+					value="#{pistaMusicalBean.pistaMusical['nombre']}" required="true"
+					autocomplete="off" />
 				<p:message for="@previous" display="icon" />
 
 				<p:outputLabel for="@next" value="Nombre del Artista" />
 				<p:inputText id="artista"
-					value="#{pistaMusicalBean.nombreDelArtista}" required="true"
-					autocomplete="off" />
+					value="#{pistaMusicalBean.pistaMusical['nombreDelArtista']}"
+					required="true" autocomplete="off" />
 				<p:message for="@previous" display="icon" />
 
 				<p:outputLabel for="@next" value="Género Musical" />
 				<p:selectOneMenu id="generoMusical"
-					value="#{pistaMusicalBean.generoMusical}" required="true">
+					value="#{pistaMusicalBean.pistaMusical['generoMusical']}"
+					required="true">
 					<f:selectItem itemLabel="Seleccionar" itemValue=""
 						noSelectionOption="true" />
 					<f:selectItem itemLabel="Rock" itemValue="ROCK" />
@@ -53,8 +58,9 @@
 				<p:message for="@previous" display="icon" />
 
 				<p:outputLabel for="@next" value="URL de la Canción" />
-				<p:inputText id="url" value="#{pistaMusicalBean.url}"
-					required="true" autocomplete="off" />
+				<p:inputText id="url"
+					value="#{pistaMusicalBean.pistaMusical['url']}" required="true"
+					autocomplete="off" />
 				<p:message for="@previous" display="icon" />
 			</p:panelGrid>
 
@@ -65,7 +71,8 @@
 					styleClass="ui-button-raised ui-button-success ui-margin-right" />
 				<p:commandButton value="Borrar"
 					styleClass="ui-button-raised ui-button-success">
-					<p:ajax update="mensajes, panelEntrada" resetValues="true" />
+					<p:ajax listener="#{pistaMusicalBean.reiniciarEntradas}"
+						update="mensajes, panelEntrada" resetValues="true" />
 				</p:commandButton>
 				<p:commandButton action="#{pistaMusicalBean.enviar}" value="Guardar"
 					update="mensajes, panelEntrada"

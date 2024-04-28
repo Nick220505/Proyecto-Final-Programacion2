@@ -1,7 +1,6 @@
 package co.edu.unbosque.forrestmfront.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +21,23 @@ public abstract class BeanBase {
 	private static final HttpHeaders headers = new HttpHeaders();
 	private static HttpEntity<String> entity;
 
-	protected JSONArray getJSON(String mapping) throws Exception {
+	protected Map<String, Object> getJSONObject(String mapping) throws Exception {
+		String json = restTemplate.getForObject(url + mapping, String.class);
+		return new JSONObject(json).toMap();
+	}
+
+	protected List<Map<String, Object>> getJSONList(String mapping) throws Exception {
+		List<Map<String, Object>> mapList = new ArrayList<>();
+		JSONArray jsonArray = getJSONArray(mapping);
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
+			Map<String, Object> map = jsonObject.toMap();
+			mapList.add(map);
+		}
+		return mapList;
+	}
+
+	protected JSONArray getJSONArray(String mapping) throws Exception {
 		String json = restTemplate.getForObject(url + mapping, String.class);
 		return new JSONArray(json);
 	}
@@ -46,20 +61,6 @@ public abstract class BeanBase {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		entity = new HttpEntity<>(jsonObject.toString(), headers);
 	}
-	
-	public List<Map<String, Object>> getJSONList(String mapping) throws Exception {
-		List<Map<String, Object>> objectList = new ArrayList<>();
-		JSONArray jsonArray = getJSON(mapping);
-		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-			Map<String, Object> object = new HashMap<>();
-			for (String key : jsonObject.keySet()) {
-				object.put(key, jsonObject.get(key));
-			}
-			objectList.add(object);
-		}
-		return objectList;
-	} 
 
 	protected void redirigirAPaginaError(String mensaje) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
