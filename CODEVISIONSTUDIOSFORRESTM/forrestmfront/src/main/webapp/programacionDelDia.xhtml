@@ -19,33 +19,37 @@
 	<f:metadata>
 		<f:viewAction action="#{programacionBean.onLoad}" />
 	</f:metadata>
-	<h1>Bienvenido a la Programación del Día</h1>
+	<p:panel
+		style="text-align: center; margin-bottom: 20px;">
+		<h1>Bienvenido a la Programación del Día</h1>
+	</p:panel>
 	<h:form>
-		<h5 class="mt-0">Pistas Musicales Disponibles</h5>
-		<p:dataTable var="pistaMusical"
-			value="#{programacionBean.pistasMusicales}" id="tablaPistasMusicales">
-			<p:column style="width: 20px;">
-				<h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
-				<p:draggable for="dragIcon" revert="true" helper="clone" />
-			</p:column>
-
-			<p:column headerText="Nombre de la Pista Musical">
-				<h:outputText value="#{pistaMusical['nombre']}" />
-			</p:column>
-
-			<p:column headerText="Nombre del Artista">
-				<h:outputText value="#{pistaMusical['nombreDelArtista']}" />
-			</p:column>
-
-
-			<p:column headerText="Género Musical">
-				<h:outputText value="#{pistaMusical['generoMusical']}" />
-			</p:column>
-
-			<p:column headerText="URL de la Pista Musical">
-				<h:outputText value="#{pistaMusical['url']}" />
-			</p:column>
-		</p:dataTable>
+		<p:fieldset id="pistasMusicales" legend="Pistas Musicales Disponibles">		
+			<p:dataTable var="pistaMusical"
+				value="#{programacionBean.pistasMusicales}" id="tablaPistasMusicales">
+				<p:column style="width: 20px;">
+					<h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
+					<p:draggable for="dragIcon" revert="true" helper="clone" />
+				</p:column>
+	
+				<p:column headerText="Nombre de la Pista Musical">
+					<h:outputText value="#{pistaMusical['nombre']}" />
+				</p:column>
+	
+				<p:column headerText="Nombre del Artista">
+					<h:outputText value="#{pistaMusical['nombreDelArtista']}" />
+				</p:column>
+	
+	
+				<p:column headerText="Género Musical">
+					<h:outputText value="#{pistaMusical['generoMusical']}" />
+				</p:column>
+	
+				<p:column headerText="URL de la Pista Musical">
+					<h:outputText value="#{pistaMusical['url']}" />
+				</p:column>
+			</p:dataTable>
+		</p:fieldset>
 
 		<p:fieldset id="pistasMusicalesAgregadas" legend="Tu lista de hoy">
 			<p:outputPanel id="dropArea">
