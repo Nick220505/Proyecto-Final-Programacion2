@@ -21,7 +21,7 @@ public class PistaMusical {
 	@Enumerated(EnumType.STRING)
 	private GeneroMusical generoMusical;
 
-	private String url;
+	private String idPista;
 
 	@Column(columnDefinition = "boolean default false")
 	private boolean agregada;
@@ -58,12 +58,12 @@ public class PistaMusical {
 		this.generoMusical = generoMusical;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getIdPista() {
+		return idPista;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setIdPista(String idPista) {
+		this.idPista = idPista;
 	}
 
 	public boolean isAgregada() {
