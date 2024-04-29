@@ -9,10 +9,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>ForrestM - Creación de Pista Musical</title>
 	<style>
-		button.ui-button {
-			margin: 10px;
-		}
-	</style>
+button.ui-button {
+	margin: 10px;
+}
+</style>
 </h:head>
 <h:body>
 	<f:metadata>
@@ -30,32 +30,20 @@
 				</f:facet>
 
 				<p:outputLabel for="@next" value="Nombre de la Pista Musical" />
-				<p:autoComplete id="nombre"
-					maxResults="10"
-					scrollHeight="250"
+				<p:autoComplete id="nombre" maxResults="10" scrollHeight="250"
 					value="#{pistaMusicalBean.pistaMusical['nombre']}"
 					completeMethod="#{pistaMusicalBean.completeTrackName}"
-					var="track"
-					itemLabel="#{track}"
-					forceSelection="true"
-					autocomplete="off"
-					required="true">
-					<p:ajax event="itemSelect" listener="#{pistaMusicalBean.onTrackSelected}" update="nombre" />
+					forceSelection="true" autocomplete="off" required="true">
+					<p:ajax event="change" process="@this" update="nombre" />
 				</p:autoComplete>
 				<p:message for="@previous" display="icon" />
 
 				<p:outputLabel for="@next" value="Nombre del Artista" />
-				<p:autoComplete id="artista"
-					maxResults="5"
-					scrollHeight="150"
+				<p:autoComplete id="artista" maxResults="5" scrollHeight="150"
 					value="#{pistaMusicalBean.pistaMusical['nombreDelArtista']}"
 					completeMethod="#{pistaMusicalBean.completeArtistName}"
-					var="artist"
-					itemLabel="#{artist}"
-					forceSelection="true"
-					autocomplete="off"
-					required="true">
-					<p:ajax event="itemSelect" listener="#{pistaMusicalBean.onArtistSelected}" update="artista" />
+					forceSelection="true" autocomplete="off" required="true">
+					<p:ajax event="change" process="@this" update="artista" />
 				</p:autoComplete>
 				<p:message for="@previous" display="icon" />
 

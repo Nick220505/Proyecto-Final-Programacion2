@@ -8,8 +8,6 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.primefaces.event.SelectEvent;
-
 @ManagedBean(name = "pistaMusicalBean")
 @SessionScoped
 public class CreacionPistaMusicalBean extends BeanBase {
@@ -46,14 +44,6 @@ public class CreacionPistaMusicalBean extends BeanBase {
 		} catch (Exception e) {
 			return new ArrayList<>();
 		}
-	}
-
-	public void onTrackSelected(SelectEvent<String> event) {
-		pistaMusical.put("nombre", event.getObject().toString());
-	}
-
-	public void onArtistSelected(SelectEvent<String> event) {
-		pistaMusical.put("nombreDelArtista", event.getObject().toString());
 	}
 
 	public void reiniciarEntradas() {
