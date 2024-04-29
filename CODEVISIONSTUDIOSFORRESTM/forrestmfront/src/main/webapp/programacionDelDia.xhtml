@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -51,11 +52,23 @@
 			</p:dataTable>
 		</p:fieldset>
 
+
 		<p:fieldset id="pistasMusicalesAgregadas" legend="Tu lista de hoy">
 			<p:outputPanel id="dropArea">
 				<h:outputText value="Arrastra Pistas Musicales aquí"
 					rendered="#{empty programacionBean.pistasMusicalesAgregadas}"
 					style="font-size: 1.5rem;"></h:outputText>
+				<ui:repeat var="pistaMusicalAgregada"
+					value="#{programacionBean.pistasMusicalesAgregadas}">
+					<div style="width: 30%; margin: 10px; display: inline-block;">
+						<iframe style="border-radius: 12px"
+							src="https://open.spotify.com/embed/track/#{pistaMusicalAgregada['url']}?utm_source=generator"
+							width="100%" height="352" frameBorder="0" allowfullscreen=""
+							allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+							loading="lazy"></iframe>
+					</div>
+				</ui:repeat>
+
 				<p:dataTable var="pistaMusicalAgregada"
 					value="#{programacionBean.pistasMusicalesAgregadas}"
 					id="tablaPistasMusicalesAgregadas"

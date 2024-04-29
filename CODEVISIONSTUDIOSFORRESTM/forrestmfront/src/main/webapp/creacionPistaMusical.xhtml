@@ -30,15 +30,33 @@
 				</f:facet>
 
 				<p:outputLabel for="@next" value="Nombre de la Pista Musical" />
-				<p:inputText id="nombre"
-					value="#{pistaMusicalBean.pistaMusical['nombre']}" required="true"
-					autocomplete="off" />
+				<p:autoComplete id="nombre"
+					maxResults="10"
+					scrollHeight="250"
+					value="#{pistaMusicalBean.pistaMusical['nombre']}"
+					completeMethod="#{pistaMusicalBean.completeTrackName}"
+					var="track"
+					itemLabel="#{track}"
+					forceSelection="true"
+					autocomplete="off"
+					required="true">
+					<p:ajax event="itemSelect" listener="#{pistaMusicalBean.onTrackSelected}" update="nombre" />
+				</p:autoComplete>
 				<p:message for="@previous" display="icon" />
 
 				<p:outputLabel for="@next" value="Nombre del Artista" />
-				<p:inputText id="artista"
+				<p:autoComplete id="artista"
+					maxResults="5"
+					scrollHeight="150"
 					value="#{pistaMusicalBean.pistaMusical['nombreDelArtista']}"
-					required="true" autocomplete="off" />
+					completeMethod="#{pistaMusicalBean.completeArtistName}"
+					var="artist"
+					itemLabel="#{artist}"
+					forceSelection="true"
+					autocomplete="off"
+					required="true">
+					<p:ajax event="itemSelect" listener="#{pistaMusicalBean.onArtistSelected}" update="artista" />
+				</p:autoComplete>
 				<p:message for="@previous" display="icon" />
 
 				<p:outputLabel for="@next" value="Género Musical" />

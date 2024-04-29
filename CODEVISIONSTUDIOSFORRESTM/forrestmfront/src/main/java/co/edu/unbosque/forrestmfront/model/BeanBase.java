@@ -42,6 +42,21 @@ public abstract class BeanBase {
 		return new JSONArray(json);
 	}
 
+	protected String getStringResponse(String mapping) {
+		try {
+			String response = restTemplate.getForObject(url + mapping, String.class);
+			return response;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected List<String> getStringListResponse(String mapping) throws Exception {
+		List<String> response = restTemplate.getForObject(url + mapping, List.class);
+		return response;
+	}
+
 	protected void postJSON(Map<String, Object> data, String mapping) throws Exception {
 		prepareHttpEntity(data);
 		restTemplate.postForObject(url + mapping, entity, String.class);
