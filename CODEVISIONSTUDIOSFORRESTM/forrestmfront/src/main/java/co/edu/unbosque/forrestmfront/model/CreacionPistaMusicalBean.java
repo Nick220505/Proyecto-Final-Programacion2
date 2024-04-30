@@ -20,7 +20,7 @@ public class CreacionPistaMusicalBean extends BeanBase {
 
 	public String enviar() {
 		try {
-			String trackId = super.getStringResponse("spotify/track/" + pistaMusical.get("nombre"));
+			String trackId = super.getStringResponse("spotify/track/" + pistaMusical.get("nombre") + "/" + pistaMusical.get("nombreDelArtista"));
 			pistaMusical.put("idPista", trackId);
 			super.postJSON(pistaMusical, "pistas/guardar");
 			return "programacionDelDia.xhtml?faces-redirect=true";
