@@ -1,5 +1,6 @@
 package co.edu.unbosque.forrestmback.api;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.model_objects.credentials.ClientCredentials;
 import se.michaelthelin.spotify.model_objects.special.SearchResult;
+import se.michaelthelin.spotify.model_objects.specification.AlbumSimplified;
+import se.michaelthelin.spotify.model_objects.specification.Artist;
+import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
+import se.michaelthelin.spotify.model_objects.specification.Paging;
+import se.michaelthelin.spotify.model_objects.specification.TrackSimplified;
 import se.michaelthelin.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
+import se.michaelthelin.spotify.requests.data.albums.GetAlbumsTracksRequest;
+import se.michaelthelin.spotify.requests.data.artists.GetArtistsAlbumsRequest;
 import se.michaelthelin.spotify.requests.data.search.SearchItemRequest;
 
 @RestController
@@ -30,9 +38,7 @@ public class SpotifyAPI {
 	@GetMapping("track/{trackName}/{artistName}")
 	public String getTrackId(@PathVariable String trackName, @PathVariable String artistName) throws Exception {
 		refreshAccessToken();
-		SearchItemRequest searchItemRequest = spotifyApi.searchItem(trackName, "track").build();
-		SearchResult searchResult = searchItemRequest.execute();
-		return Arrays.stream(searchResult.getTracks().getItems())
+		return Arrays.stream(spotifyApi.searchTracks(trackName).build().execute().getItems())
 				.filter(track -> Arrays.stream(track.getArtists())
 						.anyMatch(artist -> artist.getName().equalsIgnoreCase(artistName)))
 				.findFirst()
@@ -40,19 +46,60 @@ public class SpotifyAPI {
 				.orElseThrow(() -> new NotFoundException());
 	}
 
-	@GetMapping("tracks/{name}")
-	public List<String> searchTracks(@PathVariable String name) throws Exception {
+	@GetMapping("tracks/{trackName}")
+	public List<String> searchTracksByName(@PathVariable String trackName) throws Exception {
 		refreshAccessToken();
-		SearchItemRequest searchItemRequest = spotifyApi.searchItem(name, "track").build();
-		SearchResult searchResult = searchItemRequest.execute();
-		return Arrays.stream(searchResult.getTracks().getItems())
+		return Arrays.stream(spotifyApi.searchTracks(trackName).build().execute().getItems())
 				.map(track -> track.getName())
 				.distinct()
 				.collect(Collectors.toList());
 	}
 
+	@GetMapping("tracks/{trackName}/{artistName}")
+	public List<String> searchTracksByNameAndArtist(@PathVariable("trackName") String trackName,
+			@PathVariable("artistName") String artistName) throws Exception {
+		refreshAccessToken();
+		SearchItemRequest artistItemRequest = spotifyApi.searchItem(artistName, "artist").build();
+		SearchResult searchResult = artistItemRequest.execute();
+		String artistId = Arrays.stream(searchResult.getArtists().getItems())
+				.findFirst()
+				.map(Artist::getId)
+				.orElseThrow(() -> new NotFoundException());
+		
+		GetArtistsAlbumsRequest artistsAlbumsRequest = spotifyApi.getArtistsAlbums(artistId).build();
+		Paging<AlbumSimplified> artistsAlbumsResult = artistsAlbumsRequest.execute();
+		
+		List<String> trackNames = new ArrayList<>();
+		for (AlbumSimplified album : artistsAlbumsResult.getItems()) {
+			GetAlbumsTracksRequest albumTracksRequest = spotifyApi.getAlbumsTracks(album.getId()).build();
+			Paging<TrackSimplified> albumTracksResult = albumTracksRequest.execute();
+			trackNames.addAll(Arrays.stream(albumTracksResult.getItems())
+				.filter(track -> track.getName().toLowerCase().contains(trackName.toLowerCase()) && !track.getName().contains("-"))
+				.map(TrackSimplified::getName)
+				.distinct()
+				.collect(Collectors.toList()));
+		}
+		
+		if (trackNames.isEmpty()) {
+			throw new NotFoundException();
+		}
+		
+		return trackNames.stream()
+				.distinct()
+				.collect(Collectors.toList());
+	}
+
+	@GetMapping("artists/{artistName}")
+	public List<String> searchArtistsByName(@PathVariable String artistName) throws Exception {
+		refreshAccessToken();
+		return Arrays.stream(spotifyApi.searchArtists(artistName).build().execute().getItems())
+				.map(Artist::getName)
+				.distinct()
+				.collect(Collectors.toList());
+	}
+
 	@GetMapping("artists/{trackName}/{artistName}")
-	public List<String> searchArtists(@PathVariable("trackName") String trackName,
+	public List<String> searchArtistsByNameAndTrack(@PathVariable("trackName") String trackName,
 			@PathVariable("artistName") String artistName) throws Exception {
 		refreshAccessToken();
 		SearchItemRequest trackSearchRequest = spotifyApi.searchItem(trackName, "track").build();
@@ -61,12 +108,25 @@ public class SpotifyAPI {
 			return Arrays.stream(trackSearchResult.getTracks().getItems())
 					.flatMap(track -> Arrays.stream(track.getArtists()))
 					.filter(artist -> artist.getName().toLowerCase().contains(artistName.toLowerCase()))
-					.map(artist -> artist.getName())
+					.map(ArtistSimplified::getName)
 					.distinct()
 					.collect(Collectors.toList());
 		} else {
 			throw new NotFoundException();
 		}
+	}
+
+	@GetMapping("genres")
+	public List<String> searchAllGenres() throws Exception {
+		refreshAccessToken();
+		return Arrays.asList(spotifyApi.getAvailableGenreSeeds().build().execute());
+	}
+
+	@GetMapping("genres/{genre}")
+	public List<String> searchGenres(@PathVariable String genre) throws Exception {
+		return searchAllGenres().stream()
+				.filter(searchedGenre -> searchedGenre.toLowerCase().contains(genre.toLowerCase()))
+				.collect(Collectors.toList());
 	}
 
 	private void refreshAccessToken() throws Exception {

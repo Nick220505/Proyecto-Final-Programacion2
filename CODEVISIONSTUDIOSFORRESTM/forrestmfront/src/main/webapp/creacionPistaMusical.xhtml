@@ -34,7 +34,7 @@ button.ui-button {
 					value="#{pistaMusicalBean.pistaMusical['nombre']}"
 					completeMethod="#{pistaMusicalBean.completeTrackName}"
 					forceSelection="true" autocomplete="off" required="true">
-					<p:ajax event="change" process="@this" update="nombre" />
+					<p:ajax event="change" process="@this" update="nombre"/>
 				</p:autoComplete>
 				<p:message for="@previous" display="icon" />
 
@@ -48,18 +48,14 @@ button.ui-button {
 				<p:message for="@previous" display="icon" />
 
 				<p:outputLabel for="@next" value="Género Musical" />
-				<p:selectOneMenu id="generoMusical"
+				<p:selectOneMenu id="genreMenu"
 					value="#{pistaMusicalBean.pistaMusical['generoMusical']}"
+					filter="true" filterMatchMode="startsWith" dynamic="true"
 					required="true">
-					<f:selectItem itemLabel="Seleccionar" itemValue=""
+					<f:selectItem itemLabel="Seleccionar Género" itemValue=""
 						noSelectionOption="true" />
-					<f:selectItem itemLabel="Rock" itemValue="ROCK" />
-					<f:selectItem itemLabel="Reguetón" itemValue="REGUETÓN" />
-					<f:selectItem itemLabel="Pop" itemValue="POP" />
-					<f:selectItem itemLabel="Country" itemValue="COUNTRY" />
-					<f:selectItem itemLabel="Jazz" itemValue="JAZZ" />
-					<f:selectItem itemLabel="Rap" itemValue="RAP" />
-					<f:selectItem itemLabel="Hip Hop" itemValue="HIP_HOP" />
+					<f:selectItems value="#{pistaMusicalBean.generosMusicales}"
+						var="genre" itemLabel="#{genre}" itemValue="#{genre}" />
 				</p:selectOneMenu>
 				<p:message for="@previous" display="icon" />
 			</p:panelGrid>

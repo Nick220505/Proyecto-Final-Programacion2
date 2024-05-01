@@ -2,8 +2,6 @@ package co.edu.unbosque.forrestmback.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,8 +16,7 @@ public class PistaMusical {
 
 	private String nombreDelArtista;
 
-	@Enumerated(EnumType.STRING)
-	private GeneroMusical generoMusical;
+	private String generoMusical;
 
 	private String idPista;
 
@@ -50,11 +47,11 @@ public class PistaMusical {
 		this.nombreDelArtista = nombreDelArtista;
 	}
 
-	public GeneroMusical getGeneroMusical() {
+	public String getGeneroMusical() {
 		return generoMusical;
 	}
 
-	public void setGeneroMusical(GeneroMusical generoMusical) {
+	public void setGeneroMusical(String generoMusical) {
 		this.generoMusical = generoMusical;
 	}
 

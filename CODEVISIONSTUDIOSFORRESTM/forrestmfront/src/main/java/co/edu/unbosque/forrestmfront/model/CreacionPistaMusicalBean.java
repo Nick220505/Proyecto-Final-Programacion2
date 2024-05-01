@@ -13,14 +13,24 @@ import javax.faces.bean.SessionScoped;
 public class CreacionPistaMusicalBean extends BeanBase {
 
 	private Map<String, Object> pistaMusical;
+	private List<String> generosMusicales;
 
 	public void onLoad() {
 		pistaMusical = new HashMap<>();
+		pistaMusical.put("nombre", "");
+		pistaMusical.put("nombreDelArtista", "");
+		pistaMusical.put("generoMusical", "");
+		try {
+			generosMusicales = super.getStringListResponse("spotify/genres");
+		} catch (Exception e) {
+			generosMusicales = new ArrayList<>();
+		}
 	}
 
 	public String enviar() {
 		try {
-			String trackId = super.getStringResponse("spotify/track/" + pistaMusical.get("nombre") + "/" + pistaMusical.get("nombreDelArtista"));
+			String trackId = super.getStringResponse(
+					"spotify/track/" + pistaMusical.get("nombre") + "/" + pistaMusical.get("nombreDelArtista"));
 			pistaMusical.put("idPista", trackId);
 			super.postJSON(pistaMusical, "pistas/guardar");
 			return "programacionDelDia.xhtml?faces-redirect=true";
@@ -30,17 +40,34 @@ public class CreacionPistaMusicalBean extends BeanBase {
 		}
 	}
 
-	public List<String> completeTrackName(String name) {
+	public List<String> completeTrackName(String query) {
+		pistaMusical.put("nombre", query);
+		pistaMusical.forEach((key, value) -> System.out.println(key + ": " + value));
+		if (query == null || query.isEmpty()) {
+			return new ArrayList<>();
+		}
 		try {
-			return super.getStringListResponse("spotify/tracks/" + name);
+			if (!pistaMusical.get("nombreDelArtista").toString().isEmpty()) {
+				return super.getStringListResponse(
+						"spotify/tracks/" + query + "/" + pistaMusical.get("nombreDelArtista"));
+			}
+			return super.getStringListResponse("spotify/tracks/" + query);
 		} catch (Exception e) {
 			return new ArrayList<>();
 		}
 	}
 
-	public List<String> completeArtistName(String name) {
+	public List<String> completeArtistName(String query) {
+		pistaMusical.put("nombreDelArtista", query);
+		pistaMusical.forEach((key, value) -> System.out.println(key + ": " + value));
+		if (query == null || query.isEmpty()) {
+			return new ArrayList<>();
+		}
 		try {
-			return super.getStringListResponse("spotify/artists/" + pistaMusical.get("nombre") + "/" + name);
+			if (pistaMusical.get("nombre").toString().isEmpty()) {
+				return super.getStringListResponse("spotify/artists/" + query);
+			}
+			return super.getStringListResponse("spotify/artists/" + pistaMusical.get("nombre") + "/" + query);
 		} catch (Exception e) {
 			return new ArrayList<>();
 		}
@@ -56,6 +83,14 @@ public class CreacionPistaMusicalBean extends BeanBase {
 
 	public void setPistaMusical(Map<String, Object> pistaMusical) {
 		this.pistaMusical = pistaMusical;
+	}
+
+	public List<String> getGenerosMusicales() {
+		return generosMusicales;
+	}
+
+	public void setGenerosMusicales(List<String> generosMusicales) {
+		this.generosMusicales = generosMusicales;
 	}
 
 }
