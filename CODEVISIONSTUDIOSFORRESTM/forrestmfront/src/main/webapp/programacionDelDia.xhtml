@@ -9,6 +9,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>ForrestM - Programación del Día</title>
+	<link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
 	<script>
 		function handleDrop(event, ui) {
 			var pistaMusicalArrastrada = ui.draggable;
@@ -58,16 +59,20 @@
 				<h:outputText value="Arrastra Pistas Musicales aquí"
 					rendered="#{empty programacionBean.pistasMusicalesAgregadas}"
 					style="font-size: 1.5rem;"></h:outputText>
-				<ui:repeat var="pistaMusicalAgregada"
-					value="#{programacionBean.pistasMusicalesAgregadas}">
-					<div style="width: 30%; margin: 10px; display: inline-block;">
-						<iframe style="border-radius: 12px"
-							src="https://open.spotify.com/embed/track/#{pistaMusicalAgregada['idPista']}?utm_source=generator"
-							width="100%" height="352" frameBorder="0" allowfullscreen=""
-							allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-							loading="lazy"></iframe>
-					</div>
-				</ui:repeat>
+				<div class="grid">
+					<ui:repeat var="pistaMusicalAgregada"
+						value="#{programacionBean.pistasMusicalesAgregadas}">
+						<div class="col-12 md:col-6 lg:col-3">
+							<div class="p-3">							
+								<iframe style="border-radius: 12px"
+									src="https://open.spotify.com/embed/track/#{pistaMusicalAgregada['idPista']}?utm_source=generator"
+									width="100%" height="352" frameBorder="0" allowfullscreen=""
+									allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+									loading="lazy"></iframe>
+							</div>						
+						</div>
+					</ui:repeat>
+				</div>
 
 				<p:dataTable var="pistaMusicalAgregada"
 					value="#{programacionBean.pistasMusicalesAgregadas}"

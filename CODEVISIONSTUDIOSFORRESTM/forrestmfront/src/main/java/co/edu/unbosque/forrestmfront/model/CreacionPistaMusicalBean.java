@@ -24,6 +24,11 @@ public class CreacionPistaMusicalBean extends BeanBase {
 			generosMusicales = super.getStringListResponse("spotify/genres");
 		} catch (Exception e) {
 			generosMusicales = new ArrayList<>();
+		} finally {
+			generosMusicales.add("vallenato");
+			generosMusicales.add("corrido");
+			generosMusicales.add("merengue");
+			generosMusicales.add("cumbia");
 		}
 	}
 
@@ -42,7 +47,6 @@ public class CreacionPistaMusicalBean extends BeanBase {
 
 	public List<String> completeTrackName(String query) {
 		pistaMusical.put("nombre", query);
-		pistaMusical.forEach((key, value) -> System.out.println(key + ": " + value));
 		if (query == null || query.isEmpty()) {
 			return new ArrayList<>();
 		}
@@ -59,7 +63,6 @@ public class CreacionPistaMusicalBean extends BeanBase {
 
 	public List<String> completeArtistName(String query) {
 		pistaMusical.put("nombreDelArtista", query);
-		pistaMusical.forEach((key, value) -> System.out.println(key + ": " + value));
 		if (query == null || query.isEmpty()) {
 			return new ArrayList<>();
 		}
