@@ -21,11 +21,11 @@
 	<f:metadata>
 		<f:viewAction action="#{programacionBean.onLoad}" />
 	</f:metadata>
-	<p:panel style="text-align: center; margin-bottom: 20px;">
+	<p:panel style="text-align: center;">
 		<h1>Bienvenido a la Programación del Día</h1>
 	</p:panel>
 	<h:form>
-		<p:fieldset id="pistasMusicales" legend="Pistas Musicales Disponibles">
+		<p:fieldset id="pistasMusicales" legend="Pistas Musicales Disponibles" class="mt-3 mb-3">
 			<p:dataTable var="pistaMusicalDisponible"
 				value="#{programacionBean.pistasMusicalesDisponibles}"
 				id="tablaPistasMusicales">
