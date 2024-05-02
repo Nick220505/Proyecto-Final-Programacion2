@@ -8,11 +8,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>ForrestM - Parametrización de Emisora</title>
-	<style>
-		button.ui-button {
-			margin: 10px;
-		}
-	</style>
+	<link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
+	<link rel="stylesheet" href="styles.css" />
 </h:head>
 <h:body>
 	<f:metadata>
@@ -21,20 +18,22 @@
 	<h:form>
 		<p:card
 			style="margin: 0 auto; width: 70%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-			<p:messages id="mensajes" />
+			<p:messages class="md:text-xl lg:text-2xl" id="mensajes" />
 			<p:panelGrid columns="3" layout="grid"
-				columnClasses="ui-grid-col-4,ui-grid-col-7,ui-grid-col-1"
+				columnClasses="ui-grid-col-5,ui-grid-col-6,ui-grid-col-1"
 				styleClass="ui-panelgrid-blank ui-fluid" id="panelEntrada">
 				<f:facet name="header">
-					<h1>Parametrización de Emisora</h1>
+					<div class="m-4 mb-5">			
+						<p:outputLabel style="font-family: 'Baloo 2', sans-serif;" class="font-bold sm:text-3xl md:text-5xl lg:text-6xl">Parametrización de Emisora</p:outputLabel>
+					</div>
 				</f:facet>
 
-				<p:outputLabel for="@next" value="Nombre de la Emisora" />
-				<p:inputText id="nombre" value="#{emisoraBean.emisora['nombre']}"
+				<p:outputLabel class="md:text-2xl lg:text-4xl" for="@next" value="Nombre de la Emisora" />
+				<p:inputText class="md:text-2xl lg:text-4xl" id="nombre" value="#{emisoraBean.emisora['nombre']}"
 					required="true" autocomplete="off" />
-				<p:message for="@previous" display="icon" />
+				<p:message class="md:text-2xl lg:text-4xl" for="@previous" display="icon" />
 
-				<p:outputLabel for="@next" value="Modo de Transmisión" />
+				<p:outputLabel class="md:text-2xl lg:text-4xl" for="@next" value="Modo de Transmisión" />
 				<p:selectOneMenu id="modoDeTransmision"
 					value="#{emisoraBean.emisora['modoDeTransmision']}" required="true">
 					<f:selectItem itemLabel="Seleccionar" itemValue=""
@@ -43,9 +42,9 @@
 					<f:selectItem itemLabel="FM" itemValue="FM" />
 					<f:selectItem itemLabel="Streaming" itemValue="STREAMING" />
 				</p:selectOneMenu>
-				<p:message for="@previous" display="icon" />
+				<p:message class="md:text-2xl lg:text-4xl" for="@previous" display="icon" />
 
-				<p:outputLabel for="@next" value="Tipo de música transmitida" />
+				<p:outputLabel class="md:text-2xl lg:text-4xl" for="@next" value="Tipo de música transmitida" />
 				<p:selectOneMenu id="tipoDeMusica"
 					value="#{emisoraBean.emisora['tipoDeMusica']}" required="true">
 					<f:selectItem itemLabel="Seleccionar" itemValue=""
@@ -54,7 +53,7 @@
 					<f:selectItem itemLabel="De Planchar" itemValue="DE_PLANCHAR" />
 					<f:selectItem itemLabel="Reguetón" itemValue="REGUETÓN" />
 				</p:selectOneMenu>
-				<p:message for="@previous" display="icon" />
+				<p:message class="md:text-2xl lg:text-4xl" for="@previous" display="icon" />
 			</p:panelGrid>
 			<p:panelGrid columns="3" layout="grid"
 				columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"

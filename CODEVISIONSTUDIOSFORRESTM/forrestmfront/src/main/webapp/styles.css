@@ -1,0 +1,40 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Trocchi&display=swap');
+	
+* {
+	font-family: "Trocchi", serif;
+}
+
+button.ui-button {
+	margin: 10px;
+}
+
+.ui-selectonemenu .ui-selectonemenu-label,
+.ui-selectonemenu .ui-selectonemenu-items li,
+.ui-inputtext, .ui-autocomplete-items .ui-autocomplete-item {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 767px) {
+  .ui-selectonemenu .ui-selectonemenu-label,
+  .ui-selectonemenu .ui-selectonemenu-items li,
+  .ui-inputtext, .ui-autocomplete {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .ui-selectonemenu .ui-selectonemenu-label,
+  .ui-selectonemenu .ui-selectonemenu-items li,
+  .ui-inputtext, .ui-autocomplete {
+    font-size: 1.4rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .ui-selectonemenu .ui-selectonemenu-label,
+  .ui-selectonemenu .ui-selectonemenu-items li,
+  .ui-inputtext, .ui-autocomplete {
+    font-size: 1.8rem;
+  }
+}
