@@ -63,15 +63,15 @@
 				columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
 				styleClass="ui-panelgrid-blank ui-fluid">
 				<p:button outcome="index.xhtml" value="Ir a Inicio"
-					styleClass="ui-button-raised ui-button-success ui-margin-right fadeindown animation-duration-1000" />
+					styleClass="ui-button-raised ui-button-success ui-margin-right fadeindown animation-duration-1000 shadow-2 hover:shadow-8" />
 				<p:commandButton value="Borrar"
-					styleClass="ui-button-raised ui-button-success fadeindown animation-duration-1000">
+					styleClass="ui-button-raised ui-button-success fadeindown animation-duration-1000 shadow-2 hover:shadow-8">
 					<p:ajax listener="#{pistaMusicalBean.reiniciarEntradas}"
 						update="mensajes, panelEntrada" resetValues="true" />
 				</p:commandButton>
 				<p:commandButton action="#{pistaMusicalBean.enviar}" value="Guardar"
 					update="mensajes, panelEntrada"
-					styleClass="ui-button-raised ui-button-success fadeindown animation-duration-1000" />
+					styleClass="ui-button-raised ui-button-success fadeindown animation-duration-1000 shadow-2 hover:shadow-8" />
 			</p:panelGrid>
 		</p:card>
 	</h:form>
