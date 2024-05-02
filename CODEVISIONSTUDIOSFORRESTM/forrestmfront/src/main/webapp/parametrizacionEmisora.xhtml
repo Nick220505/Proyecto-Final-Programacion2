@@ -24,17 +24,17 @@
 				styleClass="ui-panelgrid-blank ui-fluid" id="panelEntrada">
 				<f:facet name="header">
 					<div class="m-4 mb-5">			
-						<p:outputLabel style="font-family: 'Baloo 2', sans-serif;" class="font-bold sm:text-3xl md:text-5xl lg:text-6xl">Parametrización de Emisora</p:outputLabel>
+						<p:outputLabel style="font-family: 'Baloo 2', sans-serif;" class="scalein animation-duration-1000 font-bold sm:text-3xl md:text-5xl lg:text-6xl">Parametrización de Emisora</p:outputLabel>
 					</div>
 				</f:facet>
 
-				<p:outputLabel class="md:text-2xl lg:text-4xl" for="@next" value="Nombre de la Emisora" />
-				<p:inputText class="md:text-2xl lg:text-4xl" id="nombre" value="#{emisoraBean.emisora['nombre']}"
+				<p:outputLabel class="scalein animation-duration-1000 md:text-2xl lg:text-4xl" for="@next" value="Nombre de la Emisora" />
+				<p:inputText class="scalein animation-duration-1000 md:text-2xl lg:text-4xl" id="nombre" value="#{emisoraBean.emisora['nombre']}"
 					required="true" autocomplete="off" />
 				<p:message class="md:text-2xl lg:text-4xl" for="@previous" display="icon" />
 
-				<p:outputLabel class="md:text-2xl lg:text-4xl" for="@next" value="Modo de Transmisión" />
-				<p:selectOneMenu id="modoDeTransmision"
+				<p:outputLabel class="scalein animation-duration-1000 md:text-2xl lg:text-4xl" for="@next" value="Modo de Transmisión" />
+				<p:selectOneMenu id="modoDeTransmision" class="scalein animation-duration-1000"
 					value="#{emisoraBean.emisora['modoDeTransmision']}" required="true">
 					<f:selectItem itemLabel="Seleccionar" itemValue=""
 						noSelectionOption="true" />
@@ -44,8 +44,8 @@
 				</p:selectOneMenu>
 				<p:message class="md:text-2xl lg:text-4xl" for="@previous" display="icon" />
 
-				<p:outputLabel class="md:text-2xl lg:text-4xl" for="@next" value="Tipo de música transmitida" />
-				<p:selectOneMenu id="tipoDeMusica"
+				<p:outputLabel class="scalein animation-duration-1000 md:text-2xl lg:text-4xl" for="@next" value="Tipo de música transmitida" />
+				<p:selectOneMenu id="tipoDeMusica" class="scalein animation-duration-1000"
 					value="#{emisoraBean.emisora['tipoDeMusica']}" required="true">
 					<f:selectItem itemLabel="Seleccionar" itemValue=""
 						noSelectionOption="true" />
@@ -59,16 +59,16 @@
 				columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
 				styleClass="ui-panelgrid-blank ui-fluid">
 				<p:button outcome="index.xhtml" value="Ir a Inicio"
-					styleClass="ui-button-raised ui-button-success ui-margin-right" />
+					styleClass="ui-button-raised ui-button-success ui-margin-right fadeindown animation-duration-1000" />
 				<p:commandButton value="Borrar"
-					styleClass="ui-button-raised ui-button-success">
+					styleClass="ui-button-raised ui-button-success fadeindown animation-duration-1000">
 					<p:ajax listener="#{emisoraBean.reiniciarEntradas}"
 						update="mensajes, panelEntrada" resetValues="true" />
 				</p:commandButton>
 				<p:commandButton action="#{emisoraBean.enviar}"
 					value="#{emisoraBean.textoBotonEnviar}"
 					update="mensajes, panelEntrada"
-					styleClass="ui-button-raised ui-button-success" />
+					styleClass="ui-button-raised ui-button-success fadeindown animation-duration-1000" />
 			</p:panelGrid>
 		</p:card>
 	</h:form>
