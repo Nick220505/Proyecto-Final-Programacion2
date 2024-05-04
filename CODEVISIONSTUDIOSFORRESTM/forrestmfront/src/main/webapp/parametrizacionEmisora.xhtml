@@ -8,7 +8,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>ForrestM - Parametrización de Emisora</title>
-	<h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css" />
+	<h:outputStylesheet library="webjars"
+		name="primeflex/3.3.1/primeflex.min.css" />
 	<link rel="stylesheet" href="styles.css" />
 </h:head>
 <h:body>
@@ -16,25 +17,35 @@
 		<f:viewAction action="#{emisoraBean.onLoad}" />
 	</f:metadata>
 	<h:form>
-		<p:card
-			style="margin: 0 auto; width: 70%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+		<p:card class="absolute w-10 lg:w-9 xl:w-7 top-50 left-50 border-round-3xl"
+			style="transform: translate(-50%, -50%); text-align: center;">
 			<p:messages class="md:text-xl lg:text-2xl" id="mensajes" />
 			<p:panelGrid columns="3" layout="grid"
 				columnClasses="ui-grid-col-5,ui-grid-col-6,ui-grid-col-1"
-				styleClass="ui-panelgrid-blank ui-fluid" id="panelEntrada">
+				class="ui-panelgrid-blank ui-fluid" id="panelEntrada">
 				<f:facet name="header">
-					<div class="m-4 mb-5">			
-						<p:outputLabel style="font-family: 'Baloo 2', sans-serif;" class="scalein animation-duration-1000 font-bold sm:text-3xl md:text-5xl lg:text-6xl">Parametrización de Emisora</p:outputLabel>
+					<div class="mt-4 mb-5">
+						<p:outputLabel style="font-family: 'Baloo 2', sans-serif;"
+							class="m-4 mb-5 scalein animation-duration-1000 font-bold text-3xl md:text-5xl lg:text-6xl">Parametrización de Emisora</p:outputLabel>
 					</div>
 				</f:facet>
 
-				<p:outputLabel class="scalein animation-duration-1000 md:text-2xl lg:text-4xl" for="@next" value="Nombre de la Emisora" />
-				<p:inputText class="scalein animation-duration-1000 md:text-2xl lg:text-4xl" id="nombre" value="#{emisoraBean.emisora['nombre']}"
-					required="true" autocomplete="off" />
-				<p:message class="md:text-2xl lg:text-4xl" for="@previous" display="icon" />
+				<p:outputLabel
+					class="scalein animation-duration-1000 md:text-2xl lg:text-4xl"
+					for="@next" value="Nombre de la Emisora" />
+				<p:inputText
+					class="scalein animation-duration-1000 md:text-2xl lg:text-4xl"
+					id="nombre" value="#{emisoraBean.emisora['nombre']}"
+					required="true" autocomplete="off"
+					style="font-family: 'Baloo 2', sans-serif;" />
+				<p:message class="md:text-2xl lg:text-4xl" for="@previous"
+					display="icon" />
 
-				<p:outputLabel class="scalein animation-duration-1000 md:text-2xl lg:text-4xl" for="@next" value="Modo de Transmisión" />
-				<p:selectOneMenu id="modoDeTransmision" class="scalein animation-duration-1000"
+				<p:outputLabel
+					class="scalein animation-duration-1000 md:text-2xl lg:text-4xl"
+					for="@next" value="Modo de Transmisión" />
+				<p:selectOneMenu id="modoDeTransmision"
+					class="scalein animation-duration-1000"
 					value="#{emisoraBean.emisora['modoDeTransmision']}" required="true">
 					<f:selectItem itemLabel="Seleccionar" itemValue=""
 						noSelectionOption="true" />
@@ -42,10 +53,14 @@
 					<f:selectItem itemLabel="FM" itemValue="FM" />
 					<f:selectItem itemLabel="Streaming" itemValue="STREAMING" />
 				</p:selectOneMenu>
-				<p:message class="md:text-2xl lg:text-4xl" for="@previous" display="icon" />
+				<p:message class="md:text-2xl lg:text-4xl" for="@previous"
+					display="icon" />
 
-				<p:outputLabel class="scalein animation-duration-1000 md:text-2xl lg:text-4xl" for="@next" value="Tipo de música transmitida" />
-				<p:selectOneMenu id="tipoDeMusica" class="scalein animation-duration-1000"
+				<p:outputLabel
+					class="scalein animation-duration-1000 md:text-2xl lg:text-4xl"
+					for="@next" value="Tipo de música transmitida" />
+				<p:selectOneMenu id="tipoDeMusica"
+					class="scalein animation-duration-1000"
 					value="#{emisoraBean.emisora['tipoDeMusica']}" required="true">
 					<f:selectItem itemLabel="Seleccionar" itemValue=""
 						noSelectionOption="true" />
@@ -53,22 +68,23 @@
 					<f:selectItem itemLabel="De Planchar" itemValue="DE_PLANCHAR" />
 					<f:selectItem itemLabel="Reguetón" itemValue="REGUETÓN" />
 				</p:selectOneMenu>
-				<p:message class="md:text-2xl lg:text-4xl" for="@previous" display="icon" />
+				<p:message class="md:text-2xl lg:text-4xl" for="@previous"
+					display="icon" />
 			</p:panelGrid>
 			<p:panelGrid columns="3" layout="grid"
 				columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
-				styleClass="ui-panelgrid-blank ui-fluid">
+				class="ui-panelgrid-blank ui-fluid">
 				<p:button outcome="index.xhtml" value="Ir a Inicio"
-					styleClass="ui-button-raised ui-button-success ui-margin-right fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-xl" />
+					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised ui-button-success fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl" />
 				<p:commandButton value="Borrar"
-					styleClass="ui-button-raised ui-button-success fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-xl">
+					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised ui-button-success fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl">
 					<p:ajax listener="#{emisoraBean.reiniciarEntradas}"
 						update="mensajes, panelEntrada" resetValues="true" />
 				</p:commandButton>
 				<p:commandButton action="#{emisoraBean.enviar}"
 					value="#{emisoraBean.textoBotonEnviar}"
 					update="mensajes, panelEntrada"
-					styleClass="ui-button-raised ui-button-success fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-xl" />
+					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised ui-button-success fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl" />
 			</p:panelGrid>
 		</p:card>
 	</h:form>

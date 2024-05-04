@@ -8,7 +8,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>ForrestM - Creación de Pista Musical</title>
-	<h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css" />
+	<h:outputStylesheet library="webjars"
+		name="primeflex/3.3.1/primeflex.min.css" />
 	<link rel="stylesheet" href="styles.css" />
 </h:head>
 <h:body>
@@ -17,37 +18,52 @@
 	</f:metadata>
 	<h:form>
 		<p:card
-			style="margin: 0 auto; width: 70%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+			class="absolute w-10 lg:w-9 xl:w-7 top-50 left-50 border-round-3xl"
+			style="transform: translate(-50%, -50%); text-align: center;">
 			<p:messages class="md:text-xl lg:text-2xl" id="mensajes" />
 			<p:panelGrid columns="3" layout="grid"
 				columnClasses="ui-grid-col-5,ui-grid-col-6,ui-grid-col-1"
-				styleClass="ui-panelgrid-blank ui-fluid" id="panelEntrada">
+				class="ui-panelgrid-blank ui-fluid" id="panelEntrada">
 				<f:facet name="header">
-					<div class="m-4 mb-5">					
-						<p:outputLabel style="font-family: 'Baloo 2', sans-serif;" class="scalein animation-duration-1000 font-bold sm:text-3xl md:text-5xl lg:text-6xl">Creación de Pista Musical</p:outputLabel>
+					<div class="mt-4 mb-5">
+						<p:outputLabel style="font-family: 'Baloo 2', sans-serif;"
+							class="scalein animation-duration-1000 font-bold text-3xl md:text-5xl lg:text-6xl">Creación de Pista Musical</p:outputLabel>
 					</div>
 				</f:facet>
 
-				<p:outputLabel class="scalein animation-duration-1000 md:text-2xl lg:text-4xl" for="@next" value="Nombre de la Pista Musical" />
-				<p:autoComplete class="scalein animation-duration-1000 md:text-2xl lg:text-4xl" id="nombre" maxResults="10" scrollHeight="250"
+				<p:outputLabel
+					class="scalein animation-duration-1000 md:text-2xl lg:text-4xl"
+					for="@next" value="Nombre de la Pista Musical" />
+				<p:autoComplete
+					class="scalein animation-duration-1000 md:text-2xl lg:text-4xl"
+					id="nombre" maxResults="10" scrollHeight="250"
 					value="#{pistaMusicalBean.pistaMusical['nombre']}"
 					completeMethod="#{pistaMusicalBean.completeTrackName}"
 					forceSelection="true" autocomplete="off" required="true">
-					<p:ajax event="change" process="@this" update="nombre"/>
+					<p:ajax event="change" process="@this" update="nombre" />
 				</p:autoComplete>
-				<p:message class="md:text-2xl lg:text-4xl" for="@previous" display="icon" />
+				<p:message class="md:text-2xl lg:text-4xl" for="@previous"
+					display="icon" />
 
-				<p:outputLabel class="scalein animation-duration-1000 md:text-2xl lg:text-4xl" for="@next" value="Nombre del Artista" />
-				<p:autoComplete class="scalein animation-duration-1000 md:text-2xl lg:text-4xl" id="artista" maxResults="5" scrollHeight="150"
+				<p:outputLabel
+					class="scalein animation-duration-1000 md:text-2xl lg:text-4xl"
+					for="@next" value="Nombre del Artista" />
+				<p:autoComplete
+					class="scalein animation-duration-1000 md:text-2xl lg:text-4xl"
+					id="artista" maxResults="5" scrollHeight="150"
 					value="#{pistaMusicalBean.pistaMusical['nombreDelArtista']}"
 					completeMethod="#{pistaMusicalBean.completeArtistName}"
 					forceSelection="true" autocomplete="off" required="true">
 					<p:ajax event="change" process="@this" update="artista" />
 				</p:autoComplete>
-				<p:message class="md:text-2xl lg:text-4xl" for="@previous" display="icon" />
+				<p:message class="md:text-2xl lg:text-4xl" for="@previous"
+					display="icon" />
 
-				<p:outputLabel class="scalein animation-duration-1000 md:text-2xl lg:text-4xl" for="@next" value="Género Musical" />
-				<p:selectOneMenu id="genreMenu" class="scalein animation-duration-1000"
+				<p:outputLabel
+					class="scalein animation-duration-1000 md:text-2xl lg:text-4xl"
+					for="@next" value="Género Musical" />
+				<p:selectOneMenu id="genreMenu"
+					class="scalein animation-duration-1000"
 					value="#{pistaMusicalBean.pistaMusical['generoMusical']}"
 					filter="true" filterMatchMode="startsWith" dynamic="true"
 					required="true">
@@ -56,22 +72,23 @@
 					<f:selectItems value="#{pistaMusicalBean.generosMusicales}"
 						var="genre" itemLabel="#{genre}" itemValue="#{genre}" />
 				</p:selectOneMenu>
-				<p:message class="md:text-2xl lg:text-4xl" for="@previous" display="icon" />
+				<p:message class="md:text-2xl lg:text-4xl" for="@previous"
+					display="icon" />
 			</p:panelGrid>
 
 			<p:panelGrid columns="3" layout="grid"
 				columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
-				styleClass="ui-panelgrid-blank ui-fluid">
+				class="ui-panelgrid-blank ui-fluid">
 				<p:button outcome="index.xhtml" value="Ir a Inicio"
-					styleClass="ui-button-raised ui-button-success ui-margin-right fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-xl" />
+					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised ui-button-success fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl" />
 				<p:commandButton value="Borrar"
-					styleClass="ui-button-raised ui-button-success fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-xl">
+					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised ui-button-success fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl">
 					<p:ajax listener="#{pistaMusicalBean.reiniciarEntradas}"
 						update="mensajes, panelEntrada" resetValues="true" />
 				</p:commandButton>
 				<p:commandButton action="#{pistaMusicalBean.enviar}" value="Guardar"
 					update="mensajes, panelEntrada"
-					styleClass="ui-button-raised ui-button-success fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-xl" />
+					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised ui-button-success fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl" />
 			</p:panelGrid>
 		</p:card>
 	</h:form>
