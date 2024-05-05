@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -27,6 +28,9 @@ public class ProgramacionDelDiaBean extends BeanBase {
 			pistaMusicalDisponible.put("agregada", true);
 			super.putJSON(pistaMusicalDisponible, "pistas/actualizar");
 			obtenerPistasMusicales();
+			super.addMessage(FacesMessage.SEVERITY_INFO, "Mensaje de Información",
+					"La pista musical \"" + pistaMusicalDisponible.get("nombre") + "\" de \""
+							+ pistaMusicalDisponible.get("nombreDelArtista") + "\" se ha agregado correctamente.");
 		} catch (Exception e) {
 			super.redirigirAPaginaError(e.getMessage());
 		}

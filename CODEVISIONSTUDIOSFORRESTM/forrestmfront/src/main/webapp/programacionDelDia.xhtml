@@ -22,6 +22,7 @@
 		<h1>Bienvenido a la Programación del Día</h1>
 	</p:panel>
 	<h:form>
+		<p:growl id="messages" life="5000" showDetail="true" />
 		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
 			responsive="true" width="350">
 			<p:commandButton value="No" type="button"
@@ -43,7 +44,7 @@
 				</p:column>
 
 
-				<p:column headerText="Género Musical">
+				<p:column headerText="Género Musical" style="width: 100px;">
 					<h:outputText value="#{pistaMusicalDisponible['generoMusical']}" />
 				</p:column>
 

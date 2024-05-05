@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
@@ -50,7 +51,7 @@ public abstract class BeanBase {
 			return null;
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	protected List<String> getStringListResponse(String mapping) throws Exception {
 		List<String> response = restTemplate.getForObject(url + mapping, List.class);
@@ -86,6 +87,11 @@ public abstract class BeanBase {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	protected void addMessage(FacesMessage.Severity severity, String summary, String detail) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage(severity, summary, detail));
 	}
 
 }
