@@ -17,25 +17,31 @@
 	<p:panel class="mb-5" style="text-align: center;">
 		<h1>ForrestM - Página de Gestión</h1>
 	</p:panel>
-
-	<p:panel header="¡Bienvenido a ForrestM!">
-		<p>¡Aquí puedes gestionar todo sobre tu emisora!</p>
-		<p>¿Qué te gustaría hacer hoy?</p>
-
-		<p:graphicImage name="/resources/imagen_ForrestM.jpg" />
-
-		<div style="text-align: right;">
-			<p:button outcome="programacionDelDia.xhtml"
-				value="Gestionar Programación"
-				class="shadow-2 hover:shadow-8 border-round-3xl" />
-			<p:button outcome="creacionPistaMusical.xhtml"
-				value="Crea tu cancion!"
-				class="shadow-2 hover:shadow-8 border-round-3xl" />
-			<p:button outcome="parametrizacionEmisora.xhtml"
-				value="Configura tu emisora!"
-				class="shadow-2 hover:shadow-8 border-round-3xl" />
-		</div>
-	</p:panel>
+	
+	<div class="grid grid-nogutter surface-section text-800">
+	    <div class="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
+	        <div>
+	            <span class="block text-6xl font-bold mb-1">¡Bienvenido a ForrestM! </span>
+	            <div class="text-6xl text-primary font-bold mb-3">¿Qué te gustaría hacer hoy?</div>
+	            <p class="mt-0 mb-4 text-700 line-height-3">Explora un mundo de música sin límites, crea tus propias listas y disfruta de contenido exclusivo diseñado especialmente para ti.</p>
+	
+				<p:button outcome="programacionDelDia.xhtml"
+					value="Gestionar Programación"
+					class="shadow-2 hover:shadow-8 border-round-3xl" />
+				<p:button outcome="creacionPistaMusical.xhtml"
+					value="Crea tu cancion!"
+					class="shadow-2 hover:shadow-8 border-round-3xl" />
+				<p:button outcome="parametrizacionEmisora.xhtml"
+					value="Configura tu emisora!"
+					class="shadow-2 hover:shadow-8 border-round-3xl" />
+	        </div>
+	    </div>
+	    <div class="col-12 md:col-6 overflow-hidden">
+	        <p:graphicImage name="images/blocks/hero/hero-1.png" library="primeblocks-app" alt="Image"
+	                        styleClass="md:ml-auto block md:h-full"
+	                        style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%)"/>
+	    </div>
+	</div>
 
 	<p:panel header="Algunas de nuestras obras!" class="mt-5">
 		<p:graphicImage name="/resources/cancion1.jpg" />
