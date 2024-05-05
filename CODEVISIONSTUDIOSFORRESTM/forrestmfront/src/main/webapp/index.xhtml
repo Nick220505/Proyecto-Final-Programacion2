@@ -25,15 +25,17 @@
 	            <div class="text-6xl text-primary font-bold mb-3">¿Qué te gustaría hacer hoy?</div>
 	            <p class="mt-0 mb-4 text-700 line-height-3">Explora un mundo de música sin límites, crea tus propias listas y disfruta de contenido exclusivo diseñado especialmente para ti.</p>
 	
-				<p:button outcome="programacionDelDia.xhtml"
-					value="Gestionar Programación"
-					class="shadow-2 hover:shadow-8 border-round-3xl" />
-				<p:button outcome="creacionPistaMusical.xhtml"
-					value="Crea tu cancion!"
-					class="shadow-2 hover:shadow-8 border-round-3xl" />
-				<p:button outcome="parametrizacionEmisora.xhtml"
-					value="Configura tu emisora!"
-					class="shadow-2 hover:shadow-8 border-round-3xl" />
+				<div class="grid">				
+					<p:button outcome="programacionDelDia.xhtml"
+						value="Gestionar Programación"
+						class="col shadow-2 hover:shadow-8 border-round-3xl" />
+					<p:button outcome="creacionPistaMusical.xhtml"
+						value="Crea tu cancion!"
+						class="col shadow-2 hover:shadow-8 border-round-3xl" />
+					<p:button outcome="parametrizacionEmisora.xhtml"
+						value="Configura tu emisora!"
+						class="col shadow-2 hover:shadow-8 border-round-3xl" />
+				</div>
 	        </div>
 	    </div>
 	    <div class="col-12 md:col-6 overflow-hidden">
