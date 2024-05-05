@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "programacionBean")
 @SessionScoped
@@ -15,8 +17,18 @@ public class ProgramacionDelDiaBean extends BeanBase {
 	private List<Map<String, Object>> pistasMusicalesDisponibles;
 	private List<Map<String, Object>> pistasMusicalesAgregadas;
 
+	@SuppressWarnings("unchecked")
 	public void onLoad() {
 		try {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			ExternalContext externalContext = facesContext.getExternalContext();
+			if (externalContext.getSessionMap().get("pistaCreada") != null) {
+				Map<String, Object> pistaMusicalCreada = (Map<String, Object>) externalContext.getSessionMap().get("pistaCreada");
+				super.addMessage(FacesMessage.SEVERITY_INFO, "Mensaje de Información",
+						"La pista musical \"" + pistaMusicalCreada.get("nombre") + "\" de \""
+								+ pistaMusicalCreada.get("nombreDelArtista") + "\" ha sido creada correctamente.");
+				externalContext.getSessionMap().remove("pistaCreada");
+			}
 			obtenerPistasMusicales();
 		} catch (Exception e) {
 			super.redirigirAPaginaError(e.getMessage());
@@ -68,8 +80,9 @@ public class ProgramacionDelDiaBean extends BeanBase {
 	public void eliminarPista(Map<String, Object> pistaMusical) {
 		try {
 			super.deleteJSON("pistas/eliminar/" + pistaMusical.get("id"));
-			super.addMessage(FacesMessage.SEVERITY_ERROR, "Mensaje de Información", "La pista musical \"" + pistaMusical.get("nombre") + "\" de \""
-					+ pistaMusical.get("nombreDelArtista") + "\" ha sido eliminada correctamente.");
+			super.addMessage(FacesMessage.SEVERITY_ERROR, "Mensaje de Información",
+					"La pista musical \"" + pistaMusical.get("nombre") + "\" de \""
+							+ pistaMusical.get("nombreDelArtista") + "\" ha sido eliminada correctamente.");
 			obtenerPistasMusicales();
 		} catch (Exception e) {
 			super.redirigirAPaginaError(e.getMessage());

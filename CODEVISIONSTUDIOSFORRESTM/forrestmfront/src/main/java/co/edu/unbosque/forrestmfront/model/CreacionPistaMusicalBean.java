@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "pistaMusicalBean")
 @SessionScoped
@@ -38,6 +40,9 @@ public class CreacionPistaMusicalBean extends BeanBase {
 					"spotify/track/" + pistaMusical.get("nombre") + "/" + pistaMusical.get("nombreDelArtista"));
 			pistaMusical.put("idPista", trackId);
 			super.postJSON(pistaMusical, "pistas/guardar");
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			ExternalContext externalContext = facesContext.getExternalContext();
+			externalContext.getSessionMap().put("pistaCreada", pistaMusical);
 			return "programacionDelDia.xhtml?faces-redirect=true";
 		} catch (Exception e) {
 			redirigirAPaginaError(e.getMessage());
