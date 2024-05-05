@@ -80,15 +80,15 @@
 				columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
 				class="ui-panelgrid-blank ui-fluid">
 				<p:button outcome="index.xhtml" value="Ir a Inicio"
-					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised bg-white hover:bg-cyan-500 border-cyan-500 hover:border-cyan-800 border-3 fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl" />
+					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised bg-primary hover:bg-blue-400 fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl" />
 				<p:commandButton value="Borrar"
-					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised bg-white hover:bg-cyan-500 border-cyan-500 hover:border-cyan-800 border-3 fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl">
+					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised bg-primary hover:bg-blue-400 fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl">
 					<p:ajax listener="#{pistaMusicalBean.reiniciarEntradas}"
 						update="mensajes, panelEntrada" resetValues="true" />
 				</p:commandButton>
 				<p:commandButton action="#{pistaMusicalBean.enviar}" value="Guardar"
 					update="mensajes, panelEntrada"
-					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised bg-white hover:bg-cyan-500 border-cyan-500 hover:border-cyan-800 border-3 fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl" />
+					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised bg-primary hover:bg-blue-400 fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl" />
 			</p:panelGrid>
 		</p:card>
 	</h:form>
