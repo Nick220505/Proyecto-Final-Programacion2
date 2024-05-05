@@ -11,13 +11,16 @@
 	<h:outputStylesheet library="webjars"
 		name="primeflex/3.3.1/primeflex.min.css" />
 	<link rel="stylesheet" href="styles.css" />
+	<link rel="icon" type="image/png" sizes="32x32"
+		href="#{request.contextPath}/favicon.png" />
 </h:head>
 <h:body>
 	<f:metadata>
 		<f:viewAction action="#{emisoraBean.onLoad}" />
 	</f:metadata>
 	<h:form>
-		<p:card class="absolute w-10 lg:w-10 xl:w-8 top-50 left-50 border-round-3xl"
+		<p:card
+			class="absolute w-10 lg:w-10 xl:w-8 top-50 left-50 border-round-3xl"
 			style="transform: translate(-50%, -50%); text-align: center;">
 			<p:messages class="md:text-xl lg:text-2xl" id="mensajes" />
 			<p:panelGrid columns="3" layout="grid"
