@@ -8,10 +8,12 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>ForrestM - Página de Gestión</title>
-	<h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css" />
+	<h:outputStylesheet library="webjars"
+		name="primeflex/3.3.1/primeflex.min.css" />
 	<link rel="stylesheet" href="styles.css" />
 </h:head>
 <h:body>
+	<p:scrollTop />
 	<p:panel class="mb-5" style="text-align: center;">
 		<h1>ForrestM - Página de Gestión</h1>
 	</p:panel>
@@ -23,9 +25,15 @@
 		<p:graphicImage name="/resources/imagen_ForrestM.jpg" />
 
 		<div style="text-align: right;">
-			<p:button outcome="programacionDelDia.xhtml" value="Gestionar Programación" class="shadow-2 hover:shadow-8 border-round-xl" />
-			<p:button outcome="creacionPistaMusical.xhtml" value="Crea tu cancion!" class="shadow-2 hover:shadow-8 border-round-xl" />
-			<p:button outcome="parametrizacionEmisora.xhtml" value="Configura tu emisora!" class="shadow-2 hover:shadow-8 border-round-xl" />
+			<p:button outcome="programacionDelDia.xhtml"
+				value="Gestionar Programación"
+				class="shadow-2 hover:shadow-8 border-round-3xl" />
+			<p:button outcome="creacionPistaMusical.xhtml"
+				value="Crea tu cancion!"
+				class="shadow-2 hover:shadow-8 border-round-3xl" />
+			<p:button outcome="parametrizacionEmisora.xhtml"
+				value="Configura tu emisora!"
+				class="shadow-2 hover:shadow-8 border-round-3xl" />
 		</div>
 	</p:panel>
 
@@ -35,8 +43,7 @@
 		<p:graphicImage name="/resources/cancion3.jpg" />
 	</p:panel>
 
-	<p:panel
-		style="text-align: center;">
+	<p:panel style="text-align: center;">
 		<p>ForrestM - Todos los derechos reservados</p>
 	</p:panel>
 </h:body>

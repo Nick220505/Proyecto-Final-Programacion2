@@ -22,7 +22,7 @@
 			style="transform: translate(-50%, -50%); text-align: center;">
 			<p:messages class="md:text-xl lg:text-2xl" id="mensajes" />
 			<p:panelGrid columns="3" layout="grid"
-				columnClasses="ui-grid-col-5,ui-grid-col-6,ui-grid-col-1"
+				columnClasses="ui-grid-col-6,ui-grid-col-6,ui-grid-col-1"
 				class="ui-panelgrid-blank ui-fluid" id="panelEntrada">
 				<f:facet name="header">
 					<div class="mt-4 mb-5">
@@ -35,7 +35,7 @@
 					class="scalein animation-duration-1000 md:text-2xl lg:text-4xl"
 					for="@next" value="Nombre de la Pista Musical" />
 				<p:autoComplete
-					class="scalein animation-duration-1000 md:text-2xl lg:text-4xl"
+					class="h-full scalein animation-duration-1000 md:text-2xl lg:text-4xl"
 					id="nombre" maxResults="10" scrollHeight="250"
 					value="#{pistaMusicalBean.pistaMusical['nombre']}"
 					completeMethod="#{pistaMusicalBean.completeTrackName}"
@@ -63,11 +63,11 @@
 					class="scalein animation-duration-1000 md:text-2xl lg:text-4xl"
 					for="@next" value="Género Musical" />
 				<p:selectOneMenu id="genreMenu"
-					class="scalein animation-duration-1000"
+					class="border-3 scalein animation-duration-1000"
 					value="#{pistaMusicalBean.pistaMusical['generoMusical']}"
 					filter="true" filterMatchMode="startsWith" dynamic="true"
 					required="true">
-					<f:selectItem itemLabel="Seleccionar Género" itemValue=""
+					<f:selectItem itemLabel="Seleccionar" itemValue=""
 						noSelectionOption="true" />
 					<f:selectItems value="#{pistaMusicalBean.generosMusicales}"
 						var="genre" itemLabel="#{genre}" itemValue="#{genre}" />
@@ -80,15 +80,15 @@
 				columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
 				class="ui-panelgrid-blank ui-fluid">
 				<p:button outcome="index.xhtml" value="Ir a Inicio"
-					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised ui-button-success fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl" />
+					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised bg-white hover:bg-cyan-500 border-cyan-500 hover:border-cyan-800 border-3 fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl" />
 				<p:commandButton value="Borrar"
-					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised ui-button-success fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl">
+					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised bg-white hover:bg-cyan-500 border-cyan-500 hover:border-cyan-800 border-3 fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl">
 					<p:ajax listener="#{pistaMusicalBean.reiniciarEntradas}"
 						update="mensajes, panelEntrada" resetValues="true" />
 				</p:commandButton>
 				<p:commandButton action="#{pistaMusicalBean.enviar}" value="Guardar"
 					update="mensajes, panelEntrada"
-					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised ui-button-success fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl" />
+					class="md:text-2xl lg:text-3xl xl:text-4xl ui-button-raised bg-white hover:bg-cyan-500 border-cyan-500 hover:border-cyan-800 border-3 fadeindown animation-duration-1000 shadow-2 hover:shadow-8 border-round-3xl" />
 			</p:panelGrid>
 		</p:card>
 	</h:form>
