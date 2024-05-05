@@ -1,12 +1,11 @@
 package co.edu.unbosque.forrestmfront.model;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
-import org.primefaces.event.DragDropEvent;
 
 @ManagedBean(name = "programacionBean")
 @SessionScoped
@@ -23,11 +22,10 @@ public class ProgramacionDelDiaBean extends BeanBase {
 		}
 	}
 
-	public void onDrop(DragDropEvent<Map<String, Object>> ddEvent) {
-		Map<String, Object> pistaMusicalAgregada = ddEvent.getData();
+	public void agregarALista(Map<String, Object> pistaMusicalDisponible) {
 		try {
-			pistaMusicalAgregada.put("agregada", true);
-			super.putJSON(pistaMusicalAgregada, "pistas/actualizar");
+			pistaMusicalDisponible.put("agregada", true);
+			super.putJSON(pistaMusicalDisponible, "pistas/actualizar");
 			obtenerPistasMusicales();
 		} catch (Exception e) {
 			super.redirigirAPaginaError(e.getMessage());
@@ -37,6 +35,39 @@ public class ProgramacionDelDiaBean extends BeanBase {
 	private void obtenerPistasMusicales() throws Exception {
 		pistasMusicalesDisponibles = super.getJSONList("pistas/listar-disponibles");
 		pistasMusicalesAgregadas = super.getJSONList("pistas/listar-agregadas");
+	}
+
+	public void moverArriba(Map<String, Object> pistaMusical) {
+		int index = pistasMusicalesAgregadas.indexOf(pistaMusical);
+		if (index > 0) {
+			Collections.swap(pistasMusicalesAgregadas, index, index - 1);
+		}
+	}
+
+	public void moverAbajo(Map<String, Object> pistaMusical) {
+		int index = pistasMusicalesAgregadas.indexOf(pistaMusical);
+		if (index < pistasMusicalesAgregadas.size() - 1) {
+			Collections.swap(pistasMusicalesAgregadas, index, index + 1);
+		}
+	}
+
+	public void eliminarPistaAgregada(Map<String, Object> pistaMusical) {
+		try {
+			pistaMusical.put("agregada", false);
+			super.putJSON(pistaMusical, "pistas/actualizar");
+			obtenerPistasMusicales();
+		} catch (Exception e) {
+			super.redirigirAPaginaError(e.getMessage());
+		}
+	}
+
+	public void eliminarPista(Map<String, Object> pistaMusical) {
+		try {
+			super.deleteJSON("pistas/eliminar/" + pistaMusical.get("id"));
+			obtenerPistasMusicales();
+		} catch (Exception e) {
+			super.redirigirAPaginaError(e.getMessage());
+		}
 	}
 
 	public List<Map<String, Object>> getPistasMusicalesDisponibles() {
