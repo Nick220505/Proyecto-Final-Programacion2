@@ -64,12 +64,10 @@
 					for="@next" value="Tipo de música transmitida" />
 				<p:selectOneMenu id="tipoDeMusica"
 					class="border-3 scalein animation-duration-1000"
-					value="#{emisoraBean.emisora['tipoDeMusica']}" required="true">
+					value="#{emisoraBean.emisora['tipoDeMusica']}" filter="true" filterMatchMode="startsWith" filterNormalizer="true" required="true">
 					<f:selectItem itemLabel="Seleccionar" itemValue=""
 						noSelectionOption="true" />
-					<f:selectItem itemLabel="Rock" itemValue="ROCK" />
-					<f:selectItem itemLabel="De Planchar" itemValue="DE_PLANCHAR" />
-					<f:selectItem itemLabel="Reguetón" itemValue="REGUETÓN" />
+					<f:selectItems value="#{emisoraBean.tiposDeMusica}" var="tipoDeMusica" itemLabel="#{tipoDeMusica}" itemValue="#{tipoDeMusica}" />
 				</p:selectOneMenu>
 				<p:message class="md:text-2xl lg:text-4xl" for="@previous"
 					display="icon" />

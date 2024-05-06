@@ -1,8 +1,6 @@
 package co.edu.unbosque.forrestmback.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,11 +13,9 @@ public class Emisora {
 
 	private String nombre;
 
-	@Enumerated(EnumType.STRING)
-	private ModoDeTransmision modoDeTransmision;
+	private String modoDeTransmision;
 
-	@Enumerated(EnumType.STRING)
-	private TipoDeMusica tipoDeMusica;
+	private String tipoDeMusica;
 
 	public int getId() {
 		return id;
@@ -37,19 +33,19 @@ public class Emisora {
 		this.nombre = nombre;
 	}
 
-	public ModoDeTransmision getModoDeTransmision() {
+	public String getModoDeTransmision() {
 		return modoDeTransmision;
 	}
 
-	public void setModoDeTransmision(ModoDeTransmision modoDeTransmision) {
+	public void setModoDeTransmision(String modoDeTransmision) {
 		this.modoDeTransmision = modoDeTransmision;
 	}
 
-	public TipoDeMusica getTipoDeMusica() {
+	public String getTipoDeMusica() {
 		return tipoDeMusica;
 	}
 
-	public void setTipoDeMusica(TipoDeMusica tipoDeMusica) {
+	public void setTipoDeMusica(String tipoDeMusica) {
 		this.tipoDeMusica = tipoDeMusica;
 	}
 

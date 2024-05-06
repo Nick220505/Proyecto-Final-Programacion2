@@ -20,6 +20,7 @@ import se.michaelthelin.spotify.model_objects.special.SearchResult;
 import se.michaelthelin.spotify.model_objects.specification.AlbumSimplified;
 import se.michaelthelin.spotify.model_objects.specification.Artist;
 import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
+import se.michaelthelin.spotify.model_objects.specification.Category;
 import se.michaelthelin.spotify.model_objects.specification.Paging;
 import se.michaelthelin.spotify.model_objects.specification.PlaylistSimplified;
 import se.michaelthelin.spotify.model_objects.specification.Track;
@@ -27,6 +28,7 @@ import se.michaelthelin.spotify.model_objects.specification.TrackSimplified;
 import se.michaelthelin.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
 import se.michaelthelin.spotify.requests.data.albums.GetAlbumsTracksRequest;
 import se.michaelthelin.spotify.requests.data.artists.GetArtistsAlbumsRequest;
+import se.michaelthelin.spotify.requests.data.browse.GetListOfCategoriesRequest;
 import se.michaelthelin.spotify.requests.data.browse.GetListOfFeaturedPlaylistsRequest;
 import se.michaelthelin.spotify.requests.data.search.SearchItemRequest;
 
@@ -149,6 +151,20 @@ public class SpotifyAPI {
 		final FeaturedPlaylists featuredPlaylists = getListOfFeaturedPlaylistsRequest.execute();
 		return Arrays.stream(featuredPlaylists.getPlaylists().getItems())
 				.map(PlaylistSimplified::getId)
+				.collect(Collectors.toList());
+	}
+	
+	@GetMapping("categories")
+	public List<String> searchCategories() throws Exception {
+		refreshAccessToken();
+		GetListOfCategoriesRequest getListOfCategoriesRequest = spotifyApi.getListOfCategories().build();
+		final Paging<Category> categoryPaging = getListOfCategoriesRequest.execute();
+		
+		List<String> excludedCategories = Arrays.asList("Made For You", "New Releases", "Charts", "Discover");
+		
+		return Arrays.stream(categoryPaging.getItems())
+				.map(Category::getName)
+				.filter(categoryName -> !excludedCategories.contains(categoryName))
 				.collect(Collectors.toList());
 	}
 
