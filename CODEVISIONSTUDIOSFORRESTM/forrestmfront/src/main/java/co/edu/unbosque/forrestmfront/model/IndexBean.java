@@ -3,8 +3,10 @@ package co.edu.unbosque.forrestmfront.model;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "indexBean")
+@SessionScoped
 public class IndexBean extends BeanBase {
 
 	private List<String> idsPlaylists;
