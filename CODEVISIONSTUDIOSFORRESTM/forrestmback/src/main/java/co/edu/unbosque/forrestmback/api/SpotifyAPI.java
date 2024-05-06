@@ -11,18 +11,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.neovisionaries.i18n.CountryCode;
+
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.model_objects.credentials.ClientCredentials;
+import se.michaelthelin.spotify.model_objects.special.FeaturedPlaylists;
 import se.michaelthelin.spotify.model_objects.special.SearchResult;
 import se.michaelthelin.spotify.model_objects.specification.AlbumSimplified;
 import se.michaelthelin.spotify.model_objects.specification.Artist;
 import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
 import se.michaelthelin.spotify.model_objects.specification.Paging;
+import se.michaelthelin.spotify.model_objects.specification.PlaylistSimplified;
 import se.michaelthelin.spotify.model_objects.specification.Track;
 import se.michaelthelin.spotify.model_objects.specification.TrackSimplified;
 import se.michaelthelin.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
 import se.michaelthelin.spotify.requests.data.albums.GetAlbumsTracksRequest;
 import se.michaelthelin.spotify.requests.data.artists.GetArtistsAlbumsRequest;
+import se.michaelthelin.spotify.requests.data.browse.GetListOfFeaturedPlaylistsRequest;
 import se.michaelthelin.spotify.requests.data.search.SearchItemRequest;
 
 @RestController
@@ -33,7 +38,8 @@ public class SpotifyAPI {
 
 	private static final SpotifyApi spotifyApi = new SpotifyApi.Builder()
 			.setClientId(clientId)
-			.setClientSecret(clientSecret).build();
+			.setClientSecret(clientSecret)
+			.build();
 
 	private static final ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials().build();
 
@@ -53,7 +59,8 @@ public class SpotifyAPI {
 		refreshAccessToken();
 		return Arrays.stream(spotifyApi.searchTracks(trackName).build().execute().getItems())
 				.map(Track::getName)
-				.distinct().collect(Collectors.toList());
+				.distinct()
+				.collect(Collectors.toList());
 	}
 
 	@GetMapping("tracks/{trackName}/{artistName}")
@@ -77,14 +84,18 @@ public class SpotifyAPI {
 			trackNames.addAll(Arrays.stream(albumTracksResult.getItems())
 					.filter(track -> track.getName().toLowerCase().contains(trackName.toLowerCase())
 							&& !track.getName().contains("-"))
-					.map(TrackSimplified::getName).distinct().collect(Collectors.toList()));
+					.map(TrackSimplified::getName)
+					.distinct()
+					.collect(Collectors.toList()));
 		}
 
 		if (trackNames.isEmpty()) {
 			throw new NotFoundException();
 		}
 
-		return trackNames.stream().distinct().collect(Collectors.toList());
+		return trackNames.stream()
+				.distinct()
+				.collect(Collectors.toList());
 	}
 
 	@GetMapping("artists/{artistName}")
@@ -92,7 +103,8 @@ public class SpotifyAPI {
 		refreshAccessToken();
 		return Arrays.stream(spotifyApi.searchArtists(artistName).build().execute().getItems())
 				.map(Artist::getName)
-				.distinct().collect(Collectors.toList());
+				.distinct()
+				.collect(Collectors.toList());
 	}
 
 	@GetMapping("artists/{trackName}/{artistName}")
@@ -123,6 +135,20 @@ public class SpotifyAPI {
 	public List<String> searchGenres(@PathVariable String genre) throws Exception {
 		return searchAllGenres().stream()
 				.filter(searchedGenre -> searchedGenre.toLowerCase().contains(genre.toLowerCase()))
+				.collect(Collectors.toList());
+	}
+	
+	@GetMapping("playlists")
+	public List<String> searchFeaturedPlaylists() throws Exception {
+		refreshAccessToken();
+		GetListOfFeaturedPlaylistsRequest getListOfFeaturedPlaylistsRequest = spotifyApi.getListOfFeaturedPlaylists()
+				.country(CountryCode.CO)
+				.limit(4)
+				.offset(0)
+				.build();
+		final FeaturedPlaylists featuredPlaylists = getListOfFeaturedPlaylistsRequest.execute();
+		return Arrays.stream(featuredPlaylists.getPlaylists().getItems())
+				.map(PlaylistSimplified::getId)
 				.collect(Collectors.toList());
 	}
 
