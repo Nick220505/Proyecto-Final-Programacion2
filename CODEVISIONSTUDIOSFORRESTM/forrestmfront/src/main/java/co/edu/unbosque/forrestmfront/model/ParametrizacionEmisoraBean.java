@@ -12,7 +12,7 @@ import javax.faces.bean.SessionScoped;
 public class ParametrizacionEmisoraBean extends BeanBase {
 
 	private Map<String, Object> emisora;
-	private List<String> tiposDeMusica;
+	private List<Map<String, Object>> categorias;
 	private String textoBotonEnviar;
 
 	public void onLoad() {
@@ -25,7 +25,7 @@ public class ParametrizacionEmisoraBean extends BeanBase {
 			} else {
 				setTextoBotonEnviar("Guardar");
 			}
-			tiposDeMusica = super.getStringListResponse("spotify/categories");
+			categorias = super.getJSONList("spotify/categories");
 		} catch (Exception e) {
 			super.redirigirAPaginaError(e.getMessage());
 		}
@@ -57,12 +57,12 @@ public class ParametrizacionEmisoraBean extends BeanBase {
 		this.emisora = emisora;
 	}
 
-	public List<String> getTiposDeMusica() {
-		return tiposDeMusica;
+	public List<Map<String, Object>> getCategorias() {
+		return categorias;
 	}
 
-	public void setTiposDeMusica(List<String> tiposDeMusica) {
-		this.tiposDeMusica = tiposDeMusica;
+	public void setCategorias(List<Map<String, Object>> categorias) {
+		this.categorias = categorias;
 	}
 
 	public String getTextoBotonEnviar() {

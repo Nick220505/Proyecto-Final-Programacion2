@@ -155,7 +155,7 @@ public class SpotifyAPI {
 	}
 	
 	@GetMapping("categories")
-	public List<String> searchCategories() throws Exception {
+	public List<Category> searchCategories() throws Exception {
 		refreshAccessToken();
 		GetListOfCategoriesRequest getListOfCategoriesRequest = spotifyApi.getListOfCategories().build();
 		final Paging<Category> categoryPaging = getListOfCategoriesRequest.execute();
@@ -163,8 +163,7 @@ public class SpotifyAPI {
 		List<String> excludedCategories = Arrays.asList("Made For You", "New Releases", "Charts", "Discover");
 		
 		return Arrays.stream(categoryPaging.getItems())
-				.map(Category::getName)
-				.filter(categoryName -> !excludedCategories.contains(categoryName))
+				.filter(category -> !excludedCategories.contains(category.getName()))
 				.collect(Collectors.toList());
 	}
 
