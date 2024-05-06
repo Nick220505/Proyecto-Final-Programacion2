@@ -71,66 +71,65 @@
 			</p:dataTable>
 		</p:fieldset>
 
-
 		<p:fieldset id="pistasMusicalesAgregadas" legend="Tu lista de hoy">
-			<p:outputPanel id="dropArea">
-				<h:outputText value="Arrastra Pistas Musicales aquí"
+			<p:outputPanel class="m-3 justify-content-center">
+				<h:outputText value="No se han agregado pistas musicales"
 					rendered="#{empty programacionBean.pistasMusicalesAgregadas}"
-					style="font-size: 1.5rem;"></h:outputText>
-				<div class="grid">
-					<ui:repeat var="pistaMusicalAgregada"
-						value="#{programacionBean.pistasMusicalesAgregadas}">
-						<div class="col-12 md:col-6 lg:col-4">
-							<div class="p-3">
-								<iframe style="border-radius: 12px"
-									src="https://open.spotify.com/embed/track/#{pistaMusicalAgregada['idPista']}?utm_source=generator"
-									width="100%" height="352" frameBorder="0" allowfullscreen=""
-									allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-									loading="lazy"></iframe>
-							</div>
-						</div>
-					</ui:repeat>
-				</div>
-
-				<p:dataTable var="pistaMusicalAgregada"
-					value="#{programacionBean.pistasMusicalesAgregadas}"
-					id="tablaPistasMusicalesAgregadas"
-					rendered="#{not empty programacionBean.pistasMusicalesAgregadas}">
-
-					<p:column headerText="Nombre de la Pista Musical">
-						<h:outputText value="#{pistaMusicalAgregada['nombre']}" />
-					</p:column>
-
-					<p:column headerText="Nombre del Artista">
-						<h:outputText value="#{pistaMusicalAgregada['nombreDelArtista']}" />
-					</p:column>
-
-					<p:column headerText="Género Musical">
-						<h:outputText value="#{pistaMusicalAgregada['generoMusical']}" />
-					</p:column>
-
-					<p:column headerText="ID de la Pista Musical">
-						<h:outputText value="#{pistaMusicalAgregada['idPista']}" />
-					</p:column>
-
-					<p:column headerText="Acciones">
-						<p:commandButton value="Quitar de Lista"
-							actionListener="#{programacionBean.eliminarPistaAgregada(pistaMusicalAgregada)}"
-							icon="pi pi-times" class="ui-button-danger" update="@form" />
-					</p:column>
-					<p:column headerText="Reordenar">
-						<p:commandButton icon="pi pi-arrow-up"
-							actionListener="#{programacionBean.moverArriba(pistaMusicalAgregada)}"
-							update="@form" />
-						<p:commandButton icon="pi pi-arrow-down"
-							actionListener="#{programacionBean.moverAbajo(pistaMusicalAgregada)}"
-							update="@form" />
-					</p:column>
-				</p:dataTable>
+					style="font-size: 1.5rem; text-align: center;" />
 			</p:outputPanel>
+			<div class="grid">
+				<ui:repeat var="pistaMusicalAgregada"
+					value="#{programacionBean.pistasMusicalesAgregadas}">
+					<div class="col-12 md:col-6 lg:col-4">
+						<div class="p-3">
+							<iframe style="border-radius: 12px"
+								src="https://open.spotify.com/embed/track/#{pistaMusicalAgregada['idPista']}?utm_source=generator"
+								width="100%" height="352" frameBorder="0" allowfullscreen=""
+								allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+								loading="lazy"></iframe>
+						</div>
+					</div>
+				</ui:repeat>
+			</div>
+
+			<p:dataTable var="pistaMusicalAgregada"
+				value="#{programacionBean.pistasMusicalesAgregadas}"
+				id="tablaPistasMusicalesAgregadas"
+				rendered="#{not empty programacionBean.pistasMusicalesAgregadas}">
+
+				<p:column headerText="Nombre de la Pista Musical">
+					<h:outputText value="#{pistaMusicalAgregada['nombre']}" />
+				</p:column>
+
+				<p:column headerText="Nombre del Artista">
+					<h:outputText value="#{pistaMusicalAgregada['nombreDelArtista']}" />
+				</p:column>
+
+				<p:column headerText="Género Musical">
+					<h:outputText value="#{pistaMusicalAgregada['generoMusical']}" />
+				</p:column>
+
+				<p:column headerText="ID de la Pista Musical">
+					<h:outputText value="#{pistaMusicalAgregada['idPista']}" />
+				</p:column>
+
+				<p:column headerText="Acciones">
+					<p:commandButton value="Quitar de Lista"
+						actionListener="#{programacionBean.eliminarPistaAgregada(pistaMusicalAgregada)}"
+						icon="pi pi-times" class="ui-button-danger" update="@form" />
+				</p:column>
+				<p:column headerText="Reordenar">
+					<p:commandButton icon="pi pi-arrow-up"
+						actionListener="#{programacionBean.moverArriba(pistaMusicalAgregada)}"
+						update="@form" />
+					<p:commandButton icon="pi pi-arrow-down"
+						actionListener="#{programacionBean.moverAbajo(pistaMusicalAgregada)}"
+						update="@form" />
+				</p:column>
+			</p:dataTable>
 		</p:fieldset>
 	</h:form>
-	<div style="text-align: center; margin-top: 20px;">
+	<div class="m-4" style="text-align: center;">
 		<p:button outcome="index.xhtml" value="Ir a Inicio"
 			class="shadow-2 hover:shadow-8 border-round-xl" />
 	</div>
