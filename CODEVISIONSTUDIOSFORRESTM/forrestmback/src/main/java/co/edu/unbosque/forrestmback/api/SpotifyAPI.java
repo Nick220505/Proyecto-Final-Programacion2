@@ -143,7 +143,7 @@ public class SpotifyAPI {
 		refreshAccessToken();
 		GetListOfFeaturedPlaylistsRequest getListOfFeaturedPlaylistsRequest = spotifyApi.getListOfFeaturedPlaylists()
 				.country(CountryCode.CO)
-				.limit(4)
+				.limit(6)
 				.offset(0)
 				.build();
 		final FeaturedPlaylists featuredPlaylists = getListOfFeaturedPlaylistsRequest.execute();
