@@ -18,6 +18,7 @@ import se.michaelthelin.spotify.model_objects.specification.AlbumSimplified;
 import se.michaelthelin.spotify.model_objects.specification.Artist;
 import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
 import se.michaelthelin.spotify.model_objects.specification.Paging;
+import se.michaelthelin.spotify.model_objects.specification.Track;
 import se.michaelthelin.spotify.model_objects.specification.TrackSimplified;
 import se.michaelthelin.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
 import se.michaelthelin.spotify.requests.data.albums.GetAlbumsTracksRequest;
@@ -30,7 +31,8 @@ public class SpotifyAPI {
 	private static final String clientId = "f1d23c9acc7242d1b26e245e2a8d060d";
 	private static final String clientSecret = "016750b67d6b4ef282136965971973e4";
 
-	private static final SpotifyApi spotifyApi = new SpotifyApi.Builder().setClientId(clientId)
+	private static final SpotifyApi spotifyApi = new SpotifyApi.Builder()
+			.setClientId(clientId)
 			.setClientSecret(clientSecret).build();
 
 	private static final ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials().build();
@@ -40,9 +42,9 @@ public class SpotifyAPI {
 		refreshAccessToken();
 		return Arrays.stream(spotifyApi.searchTracks(trackName).build().execute().getItems())
 				.filter(track -> Arrays.stream(track.getArtists())
-						.anyMatch(artist -> artist.getName().equalsIgnoreCase(artistName)))
+				.anyMatch(artist -> artist.getName().equalsIgnoreCase(artistName)))
 				.findFirst()
-				.map(track -> track.getId())
+				.map(Track::getId)
 				.orElseThrow(() -> new NotFoundException());
 	}
 
@@ -50,9 +52,8 @@ public class SpotifyAPI {
 	public List<String> searchTracksByName(@PathVariable String trackName) throws Exception {
 		refreshAccessToken();
 		return Arrays.stream(spotifyApi.searchTracks(trackName).build().execute().getItems())
-				.map(track -> track.getName())
-				.distinct()
-				.collect(Collectors.toList());
+				.map(Track::getName)
+				.distinct().collect(Collectors.toList());
 	}
 
 	@GetMapping("tracks/{trackName}/{artistName}")
@@ -65,28 +66,25 @@ public class SpotifyAPI {
 				.findFirst()
 				.map(Artist::getId)
 				.orElseThrow(() -> new NotFoundException());
-		
+
 		GetArtistsAlbumsRequest artistsAlbumsRequest = spotifyApi.getArtistsAlbums(artistId).build();
 		Paging<AlbumSimplified> artistsAlbumsResult = artistsAlbumsRequest.execute();
-		
+
 		List<String> trackNames = new ArrayList<>();
 		for (AlbumSimplified album : artistsAlbumsResult.getItems()) {
 			GetAlbumsTracksRequest albumTracksRequest = spotifyApi.getAlbumsTracks(album.getId()).build();
 			Paging<TrackSimplified> albumTracksResult = albumTracksRequest.execute();
 			trackNames.addAll(Arrays.stream(albumTracksResult.getItems())
-				.filter(track -> track.getName().toLowerCase().contains(trackName.toLowerCase()) && !track.getName().contains("-"))
-				.map(TrackSimplified::getName)
-				.distinct()
-				.collect(Collectors.toList()));
+					.filter(track -> track.getName().toLowerCase().contains(trackName.toLowerCase())
+							&& !track.getName().contains("-"))
+					.map(TrackSimplified::getName).distinct().collect(Collectors.toList()));
 		}
-		
+
 		if (trackNames.isEmpty()) {
 			throw new NotFoundException();
 		}
-		
-		return trackNames.stream()
-				.distinct()
-				.collect(Collectors.toList());
+
+		return trackNames.stream().distinct().collect(Collectors.toList());
 	}
 
 	@GetMapping("artists/{artistName}")
@@ -94,8 +92,7 @@ public class SpotifyAPI {
 		refreshAccessToken();
 		return Arrays.stream(spotifyApi.searchArtists(artistName).build().execute().getItems())
 				.map(Artist::getName)
-				.distinct()
-				.collect(Collectors.toList());
+				.distinct().collect(Collectors.toList());
 	}
 
 	@GetMapping("artists/{trackName}/{artistName}")
@@ -131,7 +128,6 @@ public class SpotifyAPI {
 
 	private void refreshAccessToken() throws Exception {
 		ClientCredentials clientCredentials = clientCredentialsRequest.execute();
-		// Set access token for further "spotifyApi" object usage
 		spotifyApi.setAccessToken(clientCredentials.getAccessToken());
 	}
 
