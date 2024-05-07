@@ -27,6 +27,7 @@ button.ui-button {
 	font-family: "Trocchi", serif;
 	font-size: 1.5rem !important;
 	height: 100%;
+	border-width: 3px;
 }
 
 @media ( max-width : 767px) {
