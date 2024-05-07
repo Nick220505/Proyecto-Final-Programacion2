@@ -55,18 +55,20 @@
 				</p:column>
 
 				<p:column headerText="Acciones">
-					<p:commandButton value="Eliminar" class="ui-button-danger"
-						icon="pi pi-trash"
-						actionListener="#{programacionBean.eliminarPista(pistaMusicalDisponible)}"
-						update="@form">
-						<p:confirm header="Confirmación"
-							message="¿Está seguro de que desea eliminar la canción?"
-							icon="pi pi-info-circle" />
-					</p:commandButton>
-					<p:commandButton value="Agregar a Lista" class="ui-button-primary"
-						icon="pi pi-plus"
-						actionListener="#{programacionBean.agregarALista(pistaMusicalDisponible)}"
-						update="@form" />
+					<div class="grid">					
+						<p:commandButton value="Eliminar" class="col ui-button-danger"
+							icon="pi pi-trash"
+							actionListener="#{programacionBean.eliminarPista(pistaMusicalDisponible)}"
+							update="@form">
+							<p:confirm header="Confirmación"
+								message="¿Está seguro de que desea eliminar la canción?"
+								icon="pi pi-info-circle" />
+						</p:commandButton>
+						<p:commandButton value="Agregar a Lista" class="col ui-button-primary"
+							icon="pi pi-plus"
+							actionListener="#{programacionBean.agregarALista(pistaMusicalDisponible)}"
+							update="@form" />
+					</div>
 				</p:column>
 			</p:dataTable>
 		</p:fieldset>

@@ -72,7 +72,7 @@ public class ProgramacionDelDiaBean extends BeanBase {
 			pistaMusical.put("agregada", false);
 			super.putJSON(pistaMusical, "pistas/actualizar");
 			obtenerPistasMusicales();
-			super.addMessage(FacesMessage.SEVERITY_ERROR, "Mensaje de Eliminación",
+			super.addMessage(FacesMessage.SEVERITY_INFO, "Mensaje de Información",
 					"La pista musical \"" + pistaMusical.get("nombre") + "\" de \""
 							+ pistaMusical.get("nombreDelArtista") + "\" ha sido quitada de la lista correctamente.");
 		} catch (Exception e) {
@@ -84,7 +84,7 @@ public class ProgramacionDelDiaBean extends BeanBase {
 		try {
 			super.deleteJSON("pistas/eliminar/" + pistaMusical.get("id"));
 			obtenerPistasMusicales();
-			super.addMessage(FacesMessage.SEVERITY_ERROR, "Mensaje de Eliminación",
+			super.addMessage(FacesMessage.SEVERITY_INFO, "Mensaje de Información",
 					"La pista musical \"" + pistaMusical.get("nombre") + "\" de \""
 							+ pistaMusical.get("nombreDelArtista") + "\" ha sido eliminada correctamente.");
 		} catch (Exception e) {
