@@ -18,28 +18,46 @@ button.ui-button {
 }
 
 .ui-selectonemenu .ui-selectonemenu-label, .ui-selectonemenu .ui-selectonemenu-items li,
-	.ui-inputtext, .ui-inputfield, .ui-autocomplete-items .ui-autocomplete-item, .ui-autocomplete-input
-	{
+	.ui-inputtext, .ui-inputfield, .ui-autocomplete-items .ui-autocomplete-item,
+	.ui-autocomplete-input {
 	font-size: 1.5rem;
+}
+
+.ui-autocomplete>.ui-inputfield {
+	font-family: "Trocchi", serif;
+	font-size: 1.5rem !important;
+	height: 100%;
 }
 
 @media ( max-width : 767px) {
 	.ui-selectonemenu .ui-selectonemenu-label, .ui-selectonemenu .ui-selectonemenu-items li,
-		.ui-inputtext, .ui-inputfield, .ui-autocomplete, .ui-autocomplete-input {
+		.ui-inputtext, .ui-inputfield, .ui-autocomplete,
+		.ui-autocomplete-input {
 		font-size: 1.2rem;
+	}
+	.ui-autocomplete>.ui-inputfield {
+		font-size: 1.2rem !important;
 	}
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
 	.ui-selectonemenu .ui-selectonemenu-label, .ui-selectonemenu .ui-selectonemenu-items li,
-		.ui-inputtext, .ui-inputfield, .ui-autocomplete, .ui-autocomplete-input {
+		.ui-inputtext, .ui-inputfield, .ui-autocomplete,
+		.ui-autocomplete-input {
 		font-size: 1.4rem;
+	}
+	.ui-autocomplete>.ui-inputfield {
+		font-size: 1.4rem !important;
 	}
 }
 
 @media ( min-width : 992px) {
 	.ui-selectonemenu .ui-selectonemenu-label, .ui-selectonemenu .ui-selectonemenu-items li,
-		.ui-inputtext, .ui-inputfield, .ui-autocomplete, .ui-autocomplete-input {
+		.ui-inputtext, .ui-inputfield, .ui-autocomplete,
+		.ui-autocomplete-input {
 		font-size: 1.8rem;
+	}
+	.ui-autocomplete>.ui-inputfield {
+		font-size: 1.8rem !important;
 	}
 }
