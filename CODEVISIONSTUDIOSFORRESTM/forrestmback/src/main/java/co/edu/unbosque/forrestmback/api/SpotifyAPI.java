@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.neovisionaries.i18n.CountryCode;
-
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.model_objects.credentials.ClientCredentials;
 import se.michaelthelin.spotify.model_objects.special.FeaturedPlaylists;
@@ -28,6 +26,7 @@ import se.michaelthelin.spotify.model_objects.specification.TrackSimplified;
 import se.michaelthelin.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
 import se.michaelthelin.spotify.requests.data.albums.GetAlbumsTracksRequest;
 import se.michaelthelin.spotify.requests.data.artists.GetArtistsAlbumsRequest;
+import se.michaelthelin.spotify.requests.data.browse.GetCategorysPlaylistsRequest;
 import se.michaelthelin.spotify.requests.data.browse.GetListOfCategoriesRequest;
 import se.michaelthelin.spotify.requests.data.browse.GetListOfFeaturedPlaylistsRequest;
 import se.michaelthelin.spotify.requests.data.search.SearchItemRequest;
@@ -144,12 +143,31 @@ public class SpotifyAPI {
 	public List<String> searchFeaturedPlaylists() throws Exception {
 		refreshAccessToken();
 		GetListOfFeaturedPlaylistsRequest getListOfFeaturedPlaylistsRequest = spotifyApi.getListOfFeaturedPlaylists()
-				.country(CountryCode.CO)
 				.limit(6)
 				.offset(0)
 				.build();
 		final FeaturedPlaylists featuredPlaylists = getListOfFeaturedPlaylistsRequest.execute();
 		return Arrays.stream(featuredPlaylists.getPlaylists().getItems())
+				.map(PlaylistSimplified::getId)
+				.collect(Collectors.toList());
+	}
+	
+	@GetMapping("playlists/{category}")
+	public List<String> searchPlaylistsByCategory(@PathVariable String category) throws Exception {
+		refreshAccessToken();
+		String categoryID = searchCategories().stream()
+				.filter(searchedCategory -> searchedCategory.getName().equals(category))
+				.findFirst()
+				.orElseThrow(() -> new NotFoundException())
+				.getId();
+		
+		GetCategorysPlaylistsRequest getCategoryRequest = spotifyApi.getCategorysPlaylists(categoryID)
+				.limit(6)
+				.offset(0)
+				.build();
+
+		final Paging<PlaylistSimplified> playlistSimplifiedPaging = getCategoryRequest.execute();
+		return Arrays.stream(playlistSimplifiedPaging.getItems())
 				.map(PlaylistSimplified::getId)
 				.collect(Collectors.toList());
 	}
