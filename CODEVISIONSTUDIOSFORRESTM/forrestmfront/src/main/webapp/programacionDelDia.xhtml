@@ -21,7 +21,7 @@
 	</f:metadata>
 	<p:scrollTop />
 	<p:panel style="text-align: center;">
-		<h1>Bienvenido a la Programación del Día</h1>
+		<h1 class="fadein animation-duration-1000">Bienvenido a la Programación del Día</h1>
 	</p:panel>
 	<h:form>
 		<p:growl id="messages" life="5000" showDetail="true" />
@@ -34,7 +34,7 @@
 		</p:confirmDialog>
 		<p:fieldset id="pistasMusicales" legend="Pistas Musicales Disponibles"
 			class="mt-3 mb-3">
-			<p:dataTable var="pistaMusicalDisponible"
+			<p:dataTable class="fadein animation-duration-1000" var="pistaMusicalDisponible"
 				value="#{programacionBean.pistasMusicalesDisponibles}"
 				id="tablaPistasMusicales">
 				<p:column headerText="Nombre de la Pista Musical">
@@ -74,7 +74,7 @@
 		</p:fieldset>
 
 		<p:fieldset id="pistasMusicalesAgregadas" legend="Tu lista de hoy">
-			<p:outputPanel class="m-3 justify-content-center">
+			<p:outputPanel class="m-3 justify-content-center fadein animation-duration-1000">
 				<h:outputText value="No se han agregado pistas musicales"
 					rendered="#{empty programacionBean.pistasMusicalesAgregadas}"
 					style="font-size: 1.5rem; text-align: center;" />
