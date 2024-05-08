@@ -39,8 +39,7 @@ public class SpotifyAPI {
 
 	private static final SpotifyApi spotifyApi = new SpotifyApi.Builder()
 			.setClientId(clientId)
-			.setClientSecret(clientSecret)
-			.build();
+			.setClientSecret(clientSecret).build();
 
 	private static final ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials().build();
 
@@ -49,7 +48,7 @@ public class SpotifyAPI {
 		refreshAccessToken();
 		return Arrays.stream(spotifyApi.searchTracks(trackName).build().execute().getItems())
 				.filter(track -> Arrays.stream(track.getArtists())
-				.anyMatch(artist -> artist.getName().equalsIgnoreCase(artistName)))
+						.anyMatch(artist -> artist.getName().equalsIgnoreCase(artistName)))
 				.findFirst()
 				.map(Track::getId)
 				.orElseThrow(() -> new NotFoundException());
@@ -138,7 +137,7 @@ public class SpotifyAPI {
 				.filter(searchedGenre -> searchedGenre.toLowerCase().contains(genre.toLowerCase()))
 				.collect(Collectors.toList());
 	}
-	
+
 	@GetMapping("playlists")
 	public List<String> searchFeaturedPlaylists() throws Exception {
 		refreshAccessToken();
@@ -151,16 +150,15 @@ public class SpotifyAPI {
 				.map(PlaylistSimplified::getId)
 				.collect(Collectors.toList());
 	}
-	
+
 	@GetMapping("playlists/{category}")
 	public List<String> searchPlaylistsByCategory(@PathVariable String category) throws Exception {
 		refreshAccessToken();
 		String categoryID = searchCategories().stream()
 				.filter(searchedCategory -> searchedCategory.getName().equals(category))
 				.findFirst()
-				.orElseThrow(() -> new NotFoundException())
-				.getId();
-		
+				.orElseThrow(() -> new NotFoundException()).getId();
+
 		GetCategorysPlaylistsRequest getCategoryRequest = spotifyApi.getCategorysPlaylists(categoryID)
 				.limit(6)
 				.offset(0)
@@ -171,15 +169,21 @@ public class SpotifyAPI {
 				.map(PlaylistSimplified::getId)
 				.collect(Collectors.toList());
 	}
-	
+
 	@GetMapping("categories")
 	public List<Category> searchCategories() throws Exception {
 		refreshAccessToken();
 		GetListOfCategoriesRequest getListOfCategoriesRequest = spotifyApi.getListOfCategories().build();
 		final Paging<Category> categoryPaging = getListOfCategoriesRequest.execute();
-		
-		List<String> excludedCategories = Arrays.asList("Made For You", "New Releases", "Charts", "Discover");
-		
+
+		List<String> excludedCategories = Arrays.asList(
+				"Made For You",
+				"New Releases",
+				"Charts",
+				"Discover",
+				"Dance/Electronic"
+		);
+
 		return Arrays.stream(categoryPaging.getItems())
 				.filter(category -> !excludedCategories.contains(category.getName()))
 				.collect(Collectors.toList());
