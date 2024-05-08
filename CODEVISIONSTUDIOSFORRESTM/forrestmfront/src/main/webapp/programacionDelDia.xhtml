@@ -21,7 +21,13 @@
 	</f:metadata>
 	<p:scrollTop />
 	<p:panel style="text-align: center;">
-		<h1 class="fadein animation-duration-1000">Bienvenido a la Programación del Día</h1>
+		<div class="flex overflow-hidden">
+			<p:graphicImage url="logo.png" class="flex-none flex align-items-center justify-content-center fadein animation-duration-1000" />
+			<div class="flex-grow-1 flex"></div>
+			<div class="flex-none flex justify-content-center align-items-center p-3">			
+				<h1 class="fadein animation-duration-1000">Programación del Día</h1>	
+			</div>
+		</div>
 	</p:panel>
 	<h:form>
 		<p:growl id="messages" life="5000" showDetail="true" />
