@@ -46,7 +46,11 @@ public class ParametrizacionEmisoraBean extends BeanBase {
 	}
 
 	public void reiniciarEntradas() {
-		emisora.forEach((key, value) -> emisora.put(key, ""));
+		emisora.forEach((key, value) -> {
+			if (!key.equals("id")) {
+				emisora.put(key, "");
+			}
+		});
 	}
 
 	public Map<String, Object> getEmisora() {
