@@ -31,6 +31,7 @@ public class CreacionPistaMusicalBean extends BeanBase {
 			generosMusicales.add("corrido");
 			generosMusicales.add("merengue");
 			generosMusicales.add("cumbia");
+			generosMusicales.add("bachata");
 		}
 	}
 
